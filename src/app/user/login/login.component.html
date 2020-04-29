@@ -1,0 +1,63 @@
+<app-layout>
+  <!-- login card -->
+  <mat-card *ngIf="!inProgress">
+    <mat-card-title>{{ 'login.header' | translate }}</mat-card-title>
+    <mat-card-content>
+      <form
+        [formGroup]="formGroup"
+        fxLayout="row"
+        fxLayoutGap="10px"
+        fxLayout.sm="column"
+        fxLayoutGap.sm="0px"
+        fxLayout.xs="column"
+        fxLayoutGap.xs="0px"
+        fxLayoutAlign="start">
+
+        <!-- user name -->
+        <mat-form-field fxFlex>
+          <input
+            type="text"
+            matInput
+            formControlName="username"
+            autocomplete="off"
+            [placeholder]="'login.username' | translate">
+          <label matSuffix>*</label>
+          <mat-error></mat-error>
+        </mat-form-field>
+
+        <!-- password -->
+        <mat-form-field fxFlex>
+          <input
+            type="password"
+            matInput
+            formControlName="password"
+            autocomplete="off"
+            [placeholder]="'login.password' | translate">
+          <label matSuffix>*</label>
+          <mat-error></mat-error>
+        </mat-form-field>
+        <a routerLink="/forgotpassword">{{ 'forgot-password.header-request' | translate }}</a>
+      </form>
+    </mat-card-content>
+
+    <mat-dialog-actions>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="formGroup?.invalid || formGroup?.pristine"
+          (click)="authenticate()">{{ 'login.continue' | translate }}
+        </button>
+    </mat-dialog-actions>
+
+    <div class="mat-dialog-link">
+      <a routerLink="/registration">{{ 'registration.header' | translate }}</a><br>
+    </div>
+  </mat-card>
+
+  <!-- spinner -->
+  <div *ngIf="inProgress" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</app-layout>
+

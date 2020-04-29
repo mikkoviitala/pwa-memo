@@ -1,0 +1,73 @@
+<app-layout>
+  <!-- registration card -->
+  <mat-card *ngIf="!inProgress">
+    <mat-card-title>{{ 'registration.header' | translate }}</mat-card-title>
+    <mat-card-content>
+      <form
+        [formGroup]="formGroup"
+        fxLayout="row"
+        fxLayoutGap="10px"
+        fxLayout.sm="column"
+        fxLayoutGap.sm="0px"
+        fxLayout.xs="column"
+        fxLayoutGap.xs="0px"
+        fxLayoutAlign="start">
+
+        <!-- email -->
+        <mat-form-field fxFlex>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            autocomplete="off"
+            [placeholder]="'registration.email' | translate">
+          <label matSuffix>*</label>
+        </mat-form-field>
+
+        <!-- user name -->
+        <mat-form-field fxFlex>
+          <input
+            type="text"
+            matInput
+            formControlName="username"
+            autocomplete="off"
+            [placeholder]="'registration.username' | translate">
+          <label matSuffix>*</label>
+        </mat-form-field>
+
+        <!-- password -->
+        <mat-form-field fxFlex>
+          <input
+            type="password"
+            matInput
+            minlength="8"
+            formControlName="password"
+            autocomplete="off"
+            [placeholder]="'registration.password' | translate">
+          <label matSuffix>*</label>
+          <mat-error>{{ 'error.too-short' | translate }}</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-dialog-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="formGroup?.invalid || formGroup?.pristine"
+        (click)="registration()">{{ 'registration.continue' | translate }}
+      </button>
+    </mat-dialog-actions>
+
+    <div class="mat-dialog-link">
+      <a routerLink="/login">{{ 'login.header' | translate }}</a>
+    </div>
+  </mat-card>
+
+  <!-- spinner -->
+  <div *ngIf="inProgress" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</app-layout>
+

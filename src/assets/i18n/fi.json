@@ -1,0 +1,48 @@
+{
+  "toolbar": {
+    "header": "Memo"
+  },
+  "login": {
+    "header": "Kirjaudu sisään",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "continue": "Kirjaudu"
+  },
+  "registration": {
+    "header": "Rekisteröidy",
+    "email": "Sähköposti",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "message": "Vahvista rekisteröitymisesi koodilla, joka on lähetetty sähköpostiisi.",
+    "code": "Vahvistuskoodi",
+    "continue": "Rekisteröidy",
+    "confirm": "Vahvista",
+    "resend-code": "Lähetä vahvistuskoodi uudelleen"
+  },
+  "forgot-password": {
+    "header-request": "Unohtuiko salasana?",
+    "header-reset": "Vaihda salasanasi",
+    "message-request": "Anna käyttäjätunnuksesi, niin saat salasanan vaihtokoodin sähköpostiisi.",
+    "message-reset": "Vahvistuskoodi on lähetetty sähköpostiisi.",
+    "new-password": "Uusi salasana",
+    "confirm": "Vahvista"
+  },
+  "user": {
+    "logout": "Kirjaudu ulos"
+  },
+  "success": {
+    "code": "Vahvistuskoodi hyväksytty",
+    "resend-code": "Vahvistuskoodi lähetetty sähköpostiisi",
+    "password": "Salasanasi on vaihdettu"
+  },
+  "error": {
+    "too-short": "Liian lyhyt",
+    "invalid-credentials": "Väärä käyttäjätunnus/salasana",
+    "user-exists": "Käyttäjä on jo olemassa",
+    "resend-code": "Vahvistuskoodin lähetys epäonnistui",
+    "invalid-code": "Virheellinen vahvistuskoodi",
+    "user": "Käyttäjätunnusta ei löydy",
+    "password": "Salasanan vaihto epäonnistui",
+    "unknown-error": "Tapahtui virhe: {{ param }}"
+  }
+}
