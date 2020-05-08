@@ -44,6 +44,7 @@ export class ConfirmRegistrationComponent implements OnInit {
         this.snackbarService.show(next ? 'success.code' : 'error.invalid-code');
         if (next) {
           this.localStorageService.deleteRegisteredUser();
+          this.localStorageService.deleteLoggedInUser();
           await this.router.navigate(['login']);
         }
       });

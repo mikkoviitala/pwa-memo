@@ -27,11 +27,12 @@ import {MenuComponent} from './header/menu/menu.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ConfirmDeleteMemoComponent} from './memo/dialog/confirm-delete-memo/confirm-delete-memo.component';
-import {MaterialComponentsModule} from './material-components.module';
+import {MaterialComponentsModule} from './material-components/material-components.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {translateConfig} from '../assets/translate-config';
 import localeFi from '@angular/common/locales/fi';
+import { NavigationRootComponent } from './navigation-root/navigation-root.component';
 
 registerLocaleData(localeFi, 'fi');
 
@@ -52,7 +53,8 @@ registerLocaleData(localeFi, 'fi');
     LocalDatePipe,
     MemoEditorComponent,
     FooterComponent,
-    ConfirmDeleteMemoComponent
+    ConfirmDeleteMemoComponent,
+    NavigationRootComponent
   ],
   imports: [
     BrowserModule,
