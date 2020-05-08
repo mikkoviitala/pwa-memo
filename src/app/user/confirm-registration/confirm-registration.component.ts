@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {SignUpParams} from '@aws-amplify/auth/lib-esm/types/Auth';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
@@ -57,7 +56,7 @@ export class ConfirmRegistrationComponent implements OnInit {
         finalize(() => this.inProgress = false)
       )
       .subscribe((next: any) => {
-          this.snackbarService.show(next ? 'success.resend-code' : 'error.resend-code');
+        this.snackbarService.show(next ? 'success.resend-code' : 'error.resend-code');
       });
   }
 

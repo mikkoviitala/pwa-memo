@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this._initializeForm();
   }
 
-  authenticate() {
+  authenticate(): void {
     this.inProgress = true;
     this.authService.authenticate(this.credentials)
       .pipe(
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       ).subscribe();
   }
 
-  private _initializeForm() {
+  private _initializeForm(): void {
     this.formGroup = this.formBuilder.group({
       username: [
         this.localStorageService.getLoggedInUser(), [Validators.required]

@@ -47,7 +47,7 @@ export class ForgotPasswordComponent implements OnInit {
       });
   }
 
-  private _initializeForm() {
+  private _initializeForm(): void {
     this.codeFormGroup = this.formBuilder.group({
       username: [
         null, [Validators.required]

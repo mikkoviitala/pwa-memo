@@ -32,13 +32,14 @@ export class ResetPasswordComponent implements OnInit {
     await this.guard.canActivate();
   }
 
-  resetPassword() {
+  resetPassword(): void {
     this.inProgress = true;
-    console.log(this.params);
+
     this.authService.resetPassword(this.params)
       .pipe(
         finalize(() => this.inProgress = false)
-      ).subscribe(async () => {
+      )
+      .subscribe(async () => {
         this.localStorageService.deleteRegisteredUser();
         this.snackbarService.show('success.password');
         await this.router.navigate(['login']);
@@ -47,7 +48,7 @@ export class ResetPasswordComponent implements OnInit {
       });
   }
 
-  private _initializeForm() {
+  private _initializeForm(): void {
     this.params = {
       username: this.localStorageService.getRegisteredUser(),
       code: null,

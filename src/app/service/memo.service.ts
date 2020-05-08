@@ -101,7 +101,7 @@ export class MemoService {
     from(API.graphql(graphqlOperation(query)))
       .pipe(
         first(),
-        )
+      )
       .subscribe(
         (next) => {
           const memos = Memo.fromCollection(next);

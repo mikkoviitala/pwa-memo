@@ -1,8 +1,7 @@
-import {AfterContentChecked, AfterContentInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Memo} from '../../../model/memo.class';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MediaObserver} from '@angular/flex-layout';
 
 
 @Component({
@@ -17,7 +16,6 @@ export class MemoEditorComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    mediaObserver: MediaObserver,
     private formBuilder: FormBuilder) {
   }
 

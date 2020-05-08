@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from '../../service/auth.service';
 import {Observable} from 'rxjs';
 import {AuthenticatedGuard} from '../../service/guard/authenticated.guard';
 import {Memo} from '../../model/memo.class';
@@ -21,8 +19,6 @@ export class MemoListComponent implements OnInit {
 
   constructor(
     public mediaObserver: MediaObserver,
-    private router: Router,
-    private authService: AuthService,
     private memoService: MemoService,
     private dialogService: DialogService,
     private snackbarService: SnackbarService,

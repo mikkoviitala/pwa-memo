@@ -6,7 +6,7 @@ import {Memo} from '../../model/memo.class';
   templateUrl: './memo-list-item.component.html',
   styleUrls: ['./memo-list-item.component.scss']
 })
-export class MemoListItemComponent implements OnInit{
+export class MemoListItemComponent implements OnInit {
   @Input() memo: Memo;
   @Output() update = new EventEmitter<Memo>();
   @Output() delete = new EventEmitter<Memo>();

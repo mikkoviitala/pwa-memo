@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types/Auth';
-import {finalize, first} from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 import {LocalStorageService} from '../../service/local-storage.service';
 
 @Component({
@@ -33,14 +33,14 @@ export class RegistrationComponent implements OnInit {
       .pipe(
         finalize(() => this.inProgress = false)
       ).subscribe(async (next) => {
-        if (next) {
-          this.localStorageService.setRegisteredUser(next.user.getUsername());
-          await this.router.navigate(['confirmregistration']);
-        }
+      if (next) {
+        this.localStorageService.setRegisteredUser(next.user.getUsername());
+        await this.router.navigate(['confirmregistration']);
+      }
     });
   }
 
-  private _initializeForm() {
+  private _initializeForm(): void {
     this.formGroup = this.formBuilder.group({
       email: [
         null, [Validators.required, Validators.email]

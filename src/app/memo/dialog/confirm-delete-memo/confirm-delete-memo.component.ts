@@ -7,6 +7,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./confirm-delete-memo.component.scss']
 })
 export class ConfirmDeleteMemoComponent {
+
   constructor(@Inject(MAT_DIALOG_DATA) private data: any) {
   }
 }
