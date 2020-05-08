@@ -1,0 +1,12 @@
+<div class="memo-list-item-content" (click)="onUpdate()" matRipple fxLayout="column">
+  <span class="description">{{ memo.description }}</span>
+</div>
+<div class="memo-list-item-header white" matRipple>
+  {{ memo.name }}
+</div>
+<div class="memo-list-item-footer white" matRipple>
+  {{ memo.date | localDate }}
+</div>
+<div class="memo-list-item-icon white" (click)="onDelete()">
+  <mat-icon>delete_forever</mat-icon>
+</div>

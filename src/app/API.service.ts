@@ -8,7 +8,7 @@ import * as Observable from "zen-observable";
 
 export type CreateMemoInput = {
   id?: string | null;
-  name: string;
+  name?: string | null;
   description?: string | null;
   date?: string | null;
 };
@@ -101,7 +101,7 @@ export type ModelIDInput = {
 export type CreateMemoMutation = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;
@@ -110,7 +110,7 @@ export type CreateMemoMutation = {
 export type UpdateMemoMutation = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;
@@ -119,7 +119,7 @@ export type UpdateMemoMutation = {
 export type DeleteMemoMutation = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;
@@ -128,7 +128,7 @@ export type DeleteMemoMutation = {
 export type GetMemoQuery = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;
@@ -139,7 +139,7 @@ export type ListMemosQuery = {
   items: Array<{
     __typename: "Memo";
     id: string;
-    name: string;
+    name: string | null;
     description: string | null;
     date: string | null;
     owner: string | null;
@@ -150,7 +150,7 @@ export type ListMemosQuery = {
 export type OnCreateMemoSubscription = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;
@@ -159,7 +159,7 @@ export type OnCreateMemoSubscription = {
 export type OnUpdateMemoSubscription = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;
@@ -168,7 +168,7 @@ export type OnUpdateMemoSubscription = {
 export type OnDeleteMemoSubscription = {
   __typename: "Memo";
   id: string;
-  name: string;
+  name: string | null;
   description: string | null;
   date: string | null;
   owner: string | null;

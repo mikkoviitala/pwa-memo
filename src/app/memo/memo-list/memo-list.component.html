@@ -1,1 +1,15 @@
-<p>memo-list works!</p>
+<div class="memo-list-container">
+  <!-- memo grid -->
+  <mat-grid-list cols="{{ mediaObserver.isActive('lt-md') ? 4 : 6 }}" rowHeight="150px" gutterSize="15px">
+    <mat-grid-tile
+      [ngClass]="{ 'selected-memo' : memo.id === selectedMemoId }"
+      *ngFor="let memo of memos | async" [colspan]="2" [rowspan]="1">
+        <app-memo-list-item [memo]="memo" (update)="updateMemo($event)" (delete)="deleteMemo($event)"></app-memo-list-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<!-- add memo -->
+<button mat-fab color="primary" class="app-footer-fab-button" (click)="insertMemo()">
+  <mat-icon>add</mat-icon>
+</button>

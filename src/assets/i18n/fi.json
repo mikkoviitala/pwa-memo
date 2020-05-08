@@ -9,7 +9,7 @@
     "continue": "Kirjaudu"
   },
   "registration": {
-    "header": "Rekisteröidy",
+    "header": "Uusi käyttäjä",
     "email": "Sähköposti",
     "username": "Käyttäjätunnus",
     "password": "Salasana",
@@ -22,27 +22,45 @@
   "forgot-password": {
     "header-request": "Unohtuiko salasana?",
     "header-reset": "Vaihda salasanasi",
-    "message-request": "Anna käyttäjätunnuksesi, niin saat salasanan vaihtokoodin sähköpostiisi.",
+    "message-request": "Saat vahvistuskoodin sähköpostiisi.",
     "message-reset": "Vahvistuskoodi on lähetetty sähköpostiisi.",
     "new-password": "Uusi salasana",
-    "confirm": "Vahvista"
+    "confirm": "Lähetä"
   },
   "user": {
     "logout": "Kirjaudu ulos"
   },
+  "memo": {
+    "dialog": {
+      "edit": {
+        "header": "Muistiinpano",
+        "name": "Otsikko"
+      },
+      "delete": {
+        "header": "Vahvista",
+        "message": "Poistetaanko valittu muistiinpano?"
+      },
+      "remove": "Poista",
+      "save": "Tallenna",
+      "cancel": "Peruuta"
+    }
+  },
   "success": {
     "code": "Vahvistuskoodi hyväksytty",
-    "resend-code": "Vahvistuskoodi lähetetty sähköpostiisi",
-    "password": "Salasanasi on vaihdettu"
+    "password": "Salasanasi on vaihdettu",
+    "memo-edited": "Muistiinpano tallennettu",
+    "memo-deleted": "Muistiinpano poistettu"
   },
   "error": {
     "too-short": "Liian lyhyt",
-    "invalid-credentials": "Väärä käyttäjätunnus/salasana",
+    "too-long": "Liian pitkä",
+    "invalid-credentials": "Väärä käyttäjätunnus tai salasana",
     "user-exists": "Käyttäjä on jo olemassa",
     "resend-code": "Vahvistuskoodin lähetys epäonnistui",
     "invalid-code": "Virheellinen vahvistuskoodi",
     "user": "Käyttäjätunnusta ei löydy",
     "password": "Salasanan vaihto epäonnistui",
-    "unknown-error": "Tapahtui virhe: {{ param }}"
+    "unknown-error": "Tapahtui virhe: {{ param }}",
+    "memo-deleted": "Muistiinpanon poisto ei onnistunut"
   }
 }

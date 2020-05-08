@@ -1,0 +1,65 @@
+{
+  "toolbar": {
+    "header": "Memo"
+  },
+  "login": {
+    "header": "Please log in",
+    "username": "Username",
+    "password": "Password",
+    "continue": "Log in"
+  },
+  "registration": {
+    "header": "New user",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "message": "Verify registration using code sent to your email address.",
+    "code": "Verification code",
+    "continue": "Register",
+    "confirm": "Confirm",
+    "resend-code": "Resend verification code"
+  },
+  "forgot-password": {
+    "header-request": "Forgot password?",
+    "header-reset": "Change password",
+    "message-request": "Verification code will be emailed to you.",
+    "message-reset": "Verification code sent to your email.",
+    "new-password": "New password",
+    "confirm": "Send"
+  },
+  "user": {
+    "logout": "Log out"
+  },
+  "memo": {
+    "dialog": {
+      "edit": {
+        "header": "Memo",
+        "name": "Title"
+      },
+      "delete": {
+        "header": "Confirm",
+        "message": "Remove selected memo?"
+      },
+      "remove": "Remove",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "success": {
+    "code": "Verification code accepted",
+    "password": "Password has been changed",
+    "memo-deleted": "Memo deleted"
+  },
+  "error": {
+    "too-short": "Too short",
+    "too-long": "Too long",
+    "invalid-credentials": "Invalid username or password",
+    "user-exists": "User already exists",
+    "resend-code": "Couldn't send verification code",
+    "invalid-code": "Invalid verification code",
+    "user": "User not found",
+    "password": "Password change failed",
+    "unknown-error": "Error occured: {{ param }}",
+    "deleted": "Failed to delete memo"
+  }
+}

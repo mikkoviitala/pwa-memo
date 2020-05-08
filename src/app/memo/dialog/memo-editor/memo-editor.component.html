@@ -1,0 +1,53 @@
+<div class="dialog-header" fxLayout="row" fxLayoutGap="10px">
+  <mat-icon>notes</mat-icon>
+  <span fxFlexFill>{{ 'memo.dialog.edit.header' | translate }}</span>
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-dialog-content class="dialog-content">
+  <form
+    [formGroup]="formGroup"
+    fxLayout="column"
+    fxLayoutAlign="start">
+
+    <!-- name -->
+    <mat-form-field>
+      <input
+        type="text"
+        name="name"
+        matInput
+        formControlName="name"
+        autocomplete="off"
+        [placeholder]="'memo.dialog.edit.name' | translate">
+      <mat-error *ngIf="formGroup.controls['name'].hasError('maxlength')">{{ 'error.too-long' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- description -->
+    <mat-form-field>
+      <textarea
+        id="description_id"
+        name="description"
+        matInput
+        formControlName="description"
+        autocomplete="off">
+      </textarea>
+      <mat-error *ngIf="formGroup.controls['description'].hasError('maxlength')">{{ 'error.too-long' | translate }}</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    tabindex="-1"
+    [mat-dialog-close]="null">{{ 'memo.dialog.cancel' | translate }}
+  </button>
+  <button
+    mat-raised-button
+    tabindex="-1"
+    color="primary"
+    [disabled]="formGroup?.invalid || formGroup?.pristine || disabled"
+    [mat-dialog-close]="data.memo">{{ 'memo.dialog.save' | translate }}
+  </button>
+</mat-dialog-actions>

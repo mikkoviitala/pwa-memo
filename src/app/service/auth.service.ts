@@ -9,7 +9,8 @@ import {User} from '../model/user.interface';
 import {SignInOpts} from '@aws-amplify/auth/src/types/Auth';
 import {SnackbarService} from './snackbar.service';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types/Auth';
-import { ISignUpResult } from 'amazon-cognito-identity-js';
+import {ResetPassword} from '../model/reset-password.interface';
+import {CognitoUser} from "amazon-cognito-identity-js";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
   } as User;
 
   private readonly authState = new BehaviorSubject<User>(this.unknownUser);
-  private unconfirmedUsername: string;
+  private unconfirmedUsername: string = null;
   readonly auth = this.authState.asObservable();
 
   constructor(private snackbarService: SnackbarService) {
@@ -55,7 +56,7 @@ export class AuthService {
   registerNewUser(user: SignUpParams): Promise<boolean> {
     return Auth.signUp(user)
       .then((response) => {
-        this._setUnconfirmedUsername(response);
+        this._setUnconfirmedUsername(response.user.getUsername());
         return this._resolve(true);
       }, () => this._resolve(false));
   }
@@ -66,26 +67,29 @@ export class AuthService {
   }
 
   resendVerificationCode(username: string): Promise<boolean> {
+    this._setUnconfirmedUsername(username);
     return Auth.resendSignUp(username)
       .then(() => this._resolve(true), () => this._resolve(false));
   }
 
-  resetPassword(params: any): Promise<boolean> {
-    if (!params.code || !params.password) {
-      return Auth.forgotPassword(params.username)
-        .then(() => this._resolve(true), () => this._resolve(false));
-    } else {
-      return Auth.forgotPasswordSubmit(params.username, params.code, params.password)
-        .then(() => this._resolve(true), () => this._resolve(false));
-    }
+  requestCode(username: string): Promise<boolean> {
+    this._setUnconfirmedUsername(username);
+    return Auth.forgotPassword(username)
+      .then(() => this._resolve(true), () => this._resolve(false));
   }
 
-  getUnconfirmedUsername(): string {
-    return this.unconfirmedUsername;
+  resetPassword(params: ResetPassword): Promise<boolean> {
+    this._setUnconfirmedUsername(params.username);
+    return Auth.forgotPasswordSubmit(params.username, params.code, params.password)
+      .then(() => this._resolve(true), () => this._resolve(false));
   }
 
-  private _setUnconfirmedUsername(response: ISignUpResult) {
-    this.unconfirmedUsername = response.user.getUsername();
+  getUnconfirmedUsername(): string | null {
+    return this.unconfirmedUsername || null;
+  }
+
+  private _setUnconfirmedUsername(username: string) {
+    this.unconfirmedUsername = username;
   }
 
   private _handleHubResponse(event: any, data: any): void {
@@ -93,14 +97,14 @@ export class AuthService {
       this._setUser(data);
     } else if (event === 'signIn_failure') {
       this._setUser(null);
-      this.snackbarService.info('error.invalid-credentials');
+      this.snackbarService.show('error.invalid-credentials');
     } else if (event === 'signOut') {
       this._setUser(null);
     } else if (event === 'signUp_failure') {
       if (data.code === 'UsernameExistsException') {
-        this.snackbarService.info('error.user-exists');
+        this.snackbarService.show('error.user-exists');
       } else {
-        this.snackbarService.info('error.unknown-error', { param: data.code });
+        this.snackbarService.show('error.unknown-error', { param: data.code });
       }
     }
   }

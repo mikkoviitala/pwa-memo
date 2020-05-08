@@ -1,0 +1,9 @@
+<button mat-icon-button class="menu" [disabled]="disabled" [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  (click)="logOut()">
+    <span>{{ 'user.logout' | translate }}</span>
+  </button>
+</mat-menu>

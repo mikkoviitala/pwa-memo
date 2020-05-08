@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
@@ -11,11 +11,9 @@ import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.g
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  private params: any = {};
+  private username: string;
   codeFormGroup: FormGroup;
-  resetFormGroup: FormGroup;
   inProgress: boolean;
-  hasCode: boolean;
 
   constructor(
     private router: Router,
@@ -30,27 +28,16 @@ export class ForgotPasswordComponent implements OnInit {
     await this.guard.canActivate();
   }
 
-  async resetPassword() {
-    if (!this.params) {
-      return;
-    }
-
+  async requestCode() {
     this.inProgress = true;
-    if (!this.params.code || !this.params.password) {
-      await this.authService.resetPassword(this.params)
-        .then(async (success) => {
-          this.snackbarService.info(success ? 'success.resend-code' : 'error.user');
-          this.hasCode = success;
-        });
-    } else {
-      await this.authService.resetPassword(this.params)
-        .then(async (success) => {
-          this.snackbarService.info(success ? 'success.password' : 'error.password');
-          if (success) {
-            await this.router.navigate(['login']);
-          }
-        });
-    }
+    await this.authService.requestCode(this.username)
+      .then(async (success) => {
+        if (success) {
+          await this.router.navigate(['resetpassword']);
+        } else {
+          this.snackbarService.show('error.user');
+        }
+      });
     this.inProgress = false;
   }
 
@@ -62,21 +49,6 @@ export class ForgotPasswordComponent implements OnInit {
     }, {
       updateOn: 'change',
     });
-    this.codeFormGroup.valueChanges.subscribe(values => this.params.username = values.username);
-
-    this.resetFormGroup = this.formBuilder.group({
-      code: [
-        null, [Validators.required]
-      ],
-      password: [
-        null, [Validators.required]
-      ]
-    }, {
-      updateOn: 'change',
-    });
-    this.resetFormGroup.valueChanges.subscribe(values => {
-      this.params.code = values.code;
-      this.params.password = values.password;
-    });
+    this.codeFormGroup.valueChanges.subscribe(values => this.username = values.username);
   }
 }

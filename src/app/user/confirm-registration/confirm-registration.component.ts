@@ -36,7 +36,7 @@ export class ConfirmRegistrationComponent implements OnInit {
     this.inProgress = true;
     await this.authService.verify(this.userName, this.code)
       .then(async (success) => {
-        this.snackbarService.info(success ? 'success.code' : 'error.invalid-code');
+        this.snackbarService.show(success ? 'success.code' : 'error.invalid-code');
         if (success) {
           await this.router.navigate(['login']);
         }
@@ -47,7 +47,7 @@ export class ConfirmRegistrationComponent implements OnInit {
   async resendVerificationCode() {
     this.inProgress = true;
     await this.authService.resendVerificationCode(this.userName)
-      .then(async (success) => this.snackbarService.info(success ? 'success.resend-code' : 'error.resend-code'));
+      .then(async (success) => this.snackbarService.show(success ? 'success.resend-code' : 'error.resend-code'));
     this.inProgress = false;
   }
 

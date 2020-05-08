@@ -1,5 +1,6 @@
 <mat-toolbar color="primary">
-  <h4 class="mat-h2">{{ 'toolbar.header' | translate }}</h4>
+  <h4 class="mat-h2 header-text"><a routerLink="/memo">{{ 'toolbar.header' | translate }}</a></h4>
   <span fxFlex="1 1 auto"></span>
-  <app-user-details></app-user-details>
+  <app-language-selector></app-language-selector>
+  <app-menu></app-menu>
 </mat-toolbar>

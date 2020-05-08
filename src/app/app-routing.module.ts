@@ -7,6 +7,7 @@ import {UnauthenticatedGuardService} from './service/guard/unauthenticated.guard
 import {RegistrationComponent} from './user/registration/registration.component';
 import {ConfirmRegistrationComponent} from './user/confirm-registration/confirm-registration.component';
 import {ForgotPasswordComponent} from './user/forgot-password/forgot-password.component';
+import {ResetPasswordComponent} from './user/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'forgotpassword',
     component: ForgotPasswordComponent,
+    canActivate: [UnauthenticatedGuardService]
+  },
+  {
+    path: 'resetpassword',
+    component: ResetPasswordComponent,
     canActivate: [UnauthenticatedGuardService]
   },
   {

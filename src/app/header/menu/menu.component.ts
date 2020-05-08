@@ -4,12 +4,13 @@ import {User} from '../../model/user.interface';
 import {AuthenticatedGuard} from '../../service/guard/authenticated.guard';
 
 @Component({
-  selector: 'app-user-details',
-  templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.scss']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
-export class UserDetailsComponent implements OnInit {
+export class MenuComponent implements OnInit {
   user: User;
+  disabled: boolean;
 
   constructor(
     private authService: AuthService,
@@ -17,10 +18,13 @@ export class UserDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.auth.subscribe(user => this.user = user);
+    this.authService.auth.subscribe((user: User) => {
+      this.user = user;
+      this.disabled = !user || !user.isLoggedIn;
+    });
   }
 
-  async signOut() {
+  async logOut() {
     await this.authService.revoke();
     await this.guard.canActivate();
   }

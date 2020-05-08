@@ -11,11 +11,11 @@ export class SnackbarService {
   constructor(private snackbar: MatSnackBar, private translate: TranslateService) {
   }
 
-  info(message: string, params?: any): void {
-    this.open(message, params || null, 'snackbar-info');
+  show(message: string, params?: any): void {
+    this._open(message, params || null, 'snackbar');
   }
 
-  private open(message: string, params: any, cssClass: string) {
+  private _open(message: string, params: any, cssClass: string) {
     const content = params ? this.translate.instant(message, params) : this.translate.instant(message);
     this.snackbar.open(content, null, {
       duration: this.duration,

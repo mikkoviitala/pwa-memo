@@ -1,42 +1,43 @@
-<app-layout>
+<app-card-layout>
   <!-- login card -->
-  <mat-card *ngIf="!inProgress">
-    <mat-card-title>{{ 'login.header' | translate }}</mat-card-title>
+  <mat-card *ngIf="!inProgress" class="mat-card-outlined login">
+    <mat-card-header class="header">
+      <mat-icon mat-card-avatar class="mat-primary">exit_to_app</mat-icon>
+      <mat-card-title>{{ 'login.header' | translate }}</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
       <form
         [formGroup]="formGroup"
         fxLayout="row"
         fxLayoutGap="10px"
-        fxLayout.sm="column"
-        fxLayoutGap.sm="0px"
-        fxLayout.xs="column"
-        fxLayoutGap.xs="0px"
-        fxLayoutAlign="start">
+        fxLayout.lt-sm="column"
+        fxLayoutGap.lt-sm="0px"
+        fxLayoutAlign="start"
+        fxLayoutAlign.lt-sm="space-evenly start">
 
         <!-- user name -->
-        <mat-form-field fxFlex>
+        <mat-form-field>
           <input
             type="text"
             matInput
             formControlName="username"
             autocomplete="off"
             [placeholder]="'login.username' | translate">
-          <label matSuffix>*</label>
+          <mat-icon class="form-field-suffix-icon" matSuffix>person</mat-icon>
           <mat-error></mat-error>
         </mat-form-field>
 
         <!-- password -->
-        <mat-form-field fxFlex>
+        <mat-form-field>
           <input
             type="password"
             matInput
             formControlName="password"
             autocomplete="off"
             [placeholder]="'login.password' | translate">
-          <label matSuffix>*</label>
+          <mat-icon class="form-field-suffix-icon" matSuffix>lock</mat-icon>
           <mat-error></mat-error>
         </mat-form-field>
-        <a routerLink="/forgotpassword">{{ 'forgot-password.header-request' | translate }}</a>
       </form>
     </mat-card-content>
 
@@ -49,15 +50,22 @@
         </button>
     </mat-dialog-actions>
 
-    <div class="mat-dialog-link">
-      <a routerLink="/registration">{{ 'registration.header' | translate }}</a><br>
-    </div>
+    <mat-card-footer>
+      <div class="mat-dialog-link" fxLayout="column">
+        <a routerLink="/forgotpassword" fxFlex>{{ 'forgot-password.header-request' | translate }}</a>
+      </div>
+    </mat-card-footer>
   </mat-card>
+
+  <!-- registration -->
+  <button *ngIf="!inProgress" mat-fab color="primary" class="mat-card-fab-button alogin" routerLink="/registration">
+    <mat-icon>person_add</mat-icon>
+  </button>
 
   <!-- spinner -->
   <div *ngIf="inProgress" class="spinner">
     <mat-spinner></mat-spinner>
   </div>
 
-</app-layout>
+</app-card-layout>
 

@@ -1,0 +1,59 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+.header-footer {
+  position: absolute;
+  left: -5px;
+  width: 102%;
+  min-height: 20px;
+  text-align: left;
+  padding: 3px 0 3px 10px;
+  background-color: map_get($mat-indigo, 400);
+}
+
+.memo-list-item-header {
+  @extend .header-footer;
+  top: 0;
+}
+
+.memo-list-item-footer {
+  @extend .header-footer;
+  bottom: 0;
+}
+
+.memo-list-item-content {
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+  top: 20px;
+  left: 0;
+  padding: 10px 0 0 5px;
+  text-align: left;
+
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+
+  .name {
+    font-weight: bolder;
+  }
+
+  .description {
+    white-space: pre;
+    overflow-y: auto;
+  }
+}
+
+.memo-list-item-icon {
+  cursor: pointer;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.white {
+  color: #ffffff;
+}
