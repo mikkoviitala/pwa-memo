@@ -1,9 +1,10 @@
 <app-card-layout>
   <!-- confirm registration card -->
-  <mat-card *ngIf="!inProgress">
+  <mat-card *ngIf="!inProgress" class="mat-card-outlined confirm-registration">
     <mat-card-title>{{ 'registration.header' | translate }}</mat-card-title>
     <mat-card-content>
       <div>{{ 'registration.message' | translate }}</div>
+      <br>
       <form
         [formGroup]="formGroup"
         fxLayout="row"

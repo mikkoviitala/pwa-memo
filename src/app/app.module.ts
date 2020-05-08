@@ -10,7 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {
   ErrorStateMatcher,
   MatButtonModule,
-  MatCardModule,
+  MatCardModule, MatCheckboxModule,
   MatDialogModule,
   MatDividerModule,
   MatFormFieldModule,
@@ -51,7 +51,6 @@ import {MenuComponent} from './header/menu/menu.component';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {ConfirmDeleteMemoComponent} from './memo/dialog/confirm-delete-memo/confirm-delete-memo.component';
-import {AutoFocusDirective} from './service/auto-focus.directive';
 
 registerLocaleData(localeFi, 'fi');
 
@@ -72,8 +71,7 @@ registerLocaleData(localeFi, 'fi');
     LocalDatePipe,
     MemoEditorComponent,
     FooterComponent,
-    ConfirmDeleteMemoComponent,
-    AutoFocusDirective
+    ConfirmDeleteMemoComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +97,8 @@ registerLocaleData(localeFi, 'fi');
     FormsModule,
     MatGridListModule,
     MatRippleModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCheckboxModule
   ],
   providers: [
     DatePipe,

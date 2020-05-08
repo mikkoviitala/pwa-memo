@@ -6,6 +6,7 @@
     "header": "Please log in",
     "username": "Username",
     "password": "Password",
+    "remember-me": "Remember me",
     "continue": "Log in"
   },
   "registration": {
@@ -48,6 +49,7 @@
   "success": {
     "code": "Verification code accepted",
     "password": "Password has been changed",
+    "resend-code": "Verification code sent",
     "memo-deleted": "Memo deleted"
   },
   "error": {
@@ -59,7 +61,7 @@
     "invalid-code": "Invalid verification code",
     "user": "User not found",
     "password": "Password change failed",
-    "unknown-error": "Error occured: {{ param }}",
+    "unknown-error": "Error occurred: {{ param }}",
     "deleted": "Failed to delete memo"
   }
 }

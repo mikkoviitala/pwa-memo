@@ -3,6 +3,11 @@
 </button>
 
 <mat-menu #menu="matMenu">
+  <span mat-menu-item disabled>
+    <mat-icon>face</mat-icon>
+    <strong>{{ user.name }}</strong>
+  </span>
+  <mat-divider></mat-divider>
   <button mat-menu-item  (click)="logOut()">
     <span>{{ 'user.logout' | translate }}</span>
   </button>

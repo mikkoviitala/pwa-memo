@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../service/auth.service';
 import {Router} from '@angular/router';
 import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.guard';
+import {finalize} from 'rxjs/operators';
+import {LocalStorageService} from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.g
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private formValues: SignInOpts;
+  private credentials: SignInOpts;
   formGroup: FormGroup;
   inProgress: boolean;
 
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private localStorageService: LocalStorageService,
     private guard: UnauthenticatedGuardService) {
   }
 
@@ -26,26 +29,42 @@ export class LoginComponent implements OnInit {
     this._initializeForm();
   }
 
-  async authenticate() {
+  authenticate() {
     this.inProgress = true;
-    await this.authService.authenticate(this.formValues);
-
-    this.inProgress = false;
-    await this.guard.canActivate();
+    this.authService.authenticate(this.credentials)
+      .pipe(
+        finalize(async () => {
+          this.inProgress = false;
+          await this.guard.canActivate();
+        })
+      ).subscribe();
   }
 
   private _initializeForm() {
     this.formGroup = this.formBuilder.group({
       username: [
-        null, [Validators.required]
+        this.localStorageService.getLoggedInUser(), [Validators.required]
       ],
       password: [
         null, [Validators.required]
-      ]
+      ],
+      rememberMe: this.localStorageService.getRememberMe()
     }, {
       updateOn: 'change',
     });
 
-    this.formGroup.valueChanges.subscribe(values => this.formValues = values as SignInOpts);
+    this.formGroup.valueChanges.subscribe(values => {
+      this.credentials = {
+        username: values.username,
+        password: values.password
+      } as SignInOpts;
+
+      this.localStorageService.setRememberMe(values.rememberMe);
+      if (values.rememberMe) {
+        this.localStorageService.setLoggedInUser(this.credentials.username);
+      } else {
+        this.localStorageService.deleteLoggedInUser();
+      }
+    });
   }
 }

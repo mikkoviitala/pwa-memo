@@ -4,27 +4,26 @@
 import {Injectable} from '@angular/core';
 import Auth from '@aws-amplify/auth';
 import {Hub} from '@aws-amplify/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, from, Observable, of} from 'rxjs';
 import {User} from '../model/user.interface';
 import {SignInOpts} from '@aws-amplify/auth/src/types/Auth';
 import {SnackbarService} from './snackbar.service';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types/Auth';
 import {ResetPassword} from '../model/reset-password.interface';
-import {CognitoUser} from "amazon-cognito-identity-js";
+import {CognitoUser, ISignUpResult} from 'amazon-cognito-identity-js';
+import {catchError, first} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private unknownUser = {
-    isLoggedIn: false,
-    id: null,
-    username: null,
+    name: null,
+    isLoggedIn: false
   } as User;
 
-  private readonly authState = new BehaviorSubject<User>(this.unknownUser);
-  private unconfirmedUsername: string = null;
-  readonly auth = this.authState.asObservable();
+  private readonly userState = new BehaviorSubject<User>(this.unknownUser);
+  readonly user = this.userState.asObservable();
 
   constructor(private snackbarService: SnackbarService) {
     // Get the user on creation of this service
@@ -41,55 +40,52 @@ export class AuthService {
 
   isAuthenticated(): Promise<any> {
     return Auth.currentAuthenticatedUser()
-      .then(() => this._resolve(true), () => this._resolve(false));
+      .then(
+        () => new Promise<boolean>(resolve => resolve(true)),
+        () => new Promise<boolean>(resolve => resolve(false)));
   }
 
-  authenticate(user: SignInOpts): Promise<boolean> {
-    return Auth.signIn(user)
-      .then(() => this._resolve(true), () => this._resolve(false));
+  authenticate(user: SignInOpts): Observable<CognitoUser | null> {
+    return from(Auth.signIn(user)).pipe(
+      first(),
+      catchError(() => of(null))
+    );
   }
 
-  async revoke() {
+  async revoke(): Promise<any> {
     return Auth.signOut();
   }
 
-  registerNewUser(user: SignUpParams): Promise<boolean> {
-    return Auth.signUp(user)
-      .then((response) => {
-        this._setUnconfirmedUsername(response.user.getUsername());
-        return this._resolve(true);
-      }, () => this._resolve(false));
+  registerNewUser(user: SignUpParams): Observable<ISignUpResult> {
+    return from(Auth.signUp(user)).pipe(
+      first(),
+      catchError(() => of(null))
+    );
   }
 
-  verify(username: string, code: string): Promise<boolean> {
-    return Auth.confirmSignUp(username, code)
-      .then(() => this._resolve(true), () => this._resolve(false));
+  verify(username: string, code: string): Observable<any> {
+    return from(Auth.confirmSignUp(username, code)).pipe(
+      first(),
+      catchError(() => of(null))
+    );
   }
 
-  resendVerificationCode(username: string): Promise<boolean> {
-    this._setUnconfirmedUsername(username);
-    return Auth.resendSignUp(username)
-      .then(() => this._resolve(true), () => this._resolve(false));
+  resendVerificationCode(username: string): Observable<string> {
+    return from(Auth.resendSignUp(username)).pipe(
+      first(),
+      catchError(() => of(null))
+    );
   }
 
-  requestCode(username: string): Promise<boolean> {
-    this._setUnconfirmedUsername(username);
-    return Auth.forgotPassword(username)
-      .then(() => this._resolve(true), () => this._resolve(false));
+  requestCode(username: string): Observable<any> {
+    return from(Auth.forgotPassword(username)).pipe(
+      first(),
+      catchError(() => of(null))
+    );
   }
 
-  resetPassword(params: ResetPassword): Promise<boolean> {
-    this._setUnconfirmedUsername(params.username);
-    return Auth.forgotPasswordSubmit(params.username, params.code, params.password)
-      .then(() => this._resolve(true), () => this._resolve(false));
-  }
-
-  getUnconfirmedUsername(): string | null {
-    return this.unconfirmedUsername || null;
-  }
-
-  private _setUnconfirmedUsername(username: string) {
-    this.unconfirmedUsername = username;
+  resetPassword(params: ResetPassword): Observable<void> {
+    return from(Auth.forgotPasswordSubmit(params.username, params.code, params.password)).pipe(first());
   }
 
   private _handleHubResponse(event: any, data: any): void {
@@ -104,24 +100,19 @@ export class AuthService {
       if (data.code === 'UsernameExistsException') {
         this.snackbarService.show('error.user-exists');
       } else {
-        this.snackbarService.show('error.unknown-error', { param: data.code });
+        this.snackbarService.show('error.unknown-error', {param: data.code});
       }
     }
   }
 
   private _setUser(cognitoUser: any) {
     if (cognitoUser) {
-      this.authState.next({
-        isLoggedIn: true,
-        id: cognitoUser.attributes.sub,
-        username: cognitoUser.username
+      this.userState.next({
+        name: cognitoUser.username,
+        isLoggedIn: true
       });
     } else {
-      this.authState.next(this.unknownUser);
+      this.userState.next(this.unknownUser);
     }
-  }
-
-  private _resolve(value: any): Promise<any> {
-    return new Promise<any>(resolve => resolve(value));
   }
 }

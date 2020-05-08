@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
 import {SnackbarService} from '../../service/snackbar.service';
+import {LocalStorageService} from '../../service/local-storage.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-confirm-registration',
@@ -20,38 +22,46 @@ export class ConfirmRegistrationComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private localStorageService: LocalStorageService,
     private snackbarService: SnackbarService) {
   }
 
   async ngOnInit() {
     this._initializeForm();
 
-    this.userName = this.authService.getUnconfirmedUsername();
+    this.userName = this.localStorageService.getRegisteredUser();
     if (!this.userName) {
       await this.router.navigate(['registration']);
     }
   }
 
-  async verify() {
+  verify(): void {
     this.inProgress = true;
-    await this.authService.verify(this.userName, this.code)
-      .then(async (success) => {
-        this.snackbarService.show(success ? 'success.code' : 'error.invalid-code');
-        if (success) {
+    this.authService.verify(this.userName, this.code)
+      .pipe(
+        finalize(() => this.inProgress = false)
+      )
+      .subscribe(async (next: any) => {
+        this.snackbarService.show(next ? 'success.code' : 'error.invalid-code');
+        if (next) {
+          this.localStorageService.deleteRegisteredUser();
           await this.router.navigate(['login']);
         }
       });
-    this.inProgress = false;
   }
 
-  async resendVerificationCode() {
+  resendVerificationCode(): void {
     this.inProgress = true;
-    await this.authService.resendVerificationCode(this.userName)
-      .then(async (success) => this.snackbarService.show(success ? 'success.resend-code' : 'error.resend-code'));
-    this.inProgress = false;
+    this.authService.resendVerificationCode(this.userName)
+      .pipe(
+        finalize(() => this.inProgress = false)
+      )
+      .subscribe((next: any) => {
+          this.snackbarService.show(next ? 'success.resend-code' : 'error.resend-code');
+      });
   }
 
-  private _initializeForm() {
+  private _initializeForm(): void {
     this.formGroup = this.formBuilder.group({
       code: [
         null, [Validators.required]

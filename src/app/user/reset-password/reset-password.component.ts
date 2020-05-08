@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {SignInOpts} from '@aws-amplify/auth/src/types/Auth';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../service/auth.service';
 import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.guard';
 import {SnackbarService} from '../../service/snackbar.service';
 import {ResetPassword} from '../../model/reset-password.interface';
+import {LocalStorageService} from '../../service/local-storage.service';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,6 +22,7 @@ export class ResetPasswordComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private localStorageService: LocalStorageService,
     private guard: UnauthenticatedGuardService,
     private snackbarService: SnackbarService) {
   }
@@ -30,21 +32,24 @@ export class ResetPasswordComponent implements OnInit {
     await this.guard.canActivate();
   }
 
-  async resetPassword() {
+  resetPassword() {
     this.inProgress = true;
-    await this.authService.resetPassword(this.params)
-      .then(async (success) => {
-        this.snackbarService.show(success ? 'success.password' : 'error.password');
-        if (success) {
-          await this.router.navigate(['login']);
-        }
+    console.log(this.params);
+    this.authService.resetPassword(this.params)
+      .pipe(
+        finalize(() => this.inProgress = false)
+      ).subscribe(async () => {
+        this.localStorageService.deleteRegisteredUser();
+        this.snackbarService.show('success.password');
+        await this.router.navigate(['login']);
+      }, () => {
+        this.snackbarService.show('error.password');
       });
-    this.inProgress = false;
   }
 
   private _initializeForm() {
     this.params = {
-      username: this.authService.getUnconfirmedUsername(),
+      username: this.localStorageService.getRegisteredUser(),
       code: null,
       password: null
     };

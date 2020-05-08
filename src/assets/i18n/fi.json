@@ -6,6 +6,7 @@
     "header": "Kirjaudu sisään",
     "username": "Käyttäjätunnus",
     "password": "Salasana",
+    "remember-me": "Muista minut",
     "continue": "Kirjaudu"
   },
   "registration": {
@@ -48,6 +49,7 @@
   "success": {
     "code": "Vahvistuskoodi hyväksytty",
     "password": "Salasanasi on vaihdettu",
+    "resend-code": "Vahvistuskoodi lähetetty",
     "memo-edited": "Muistiinpano tallennettu",
     "memo-deleted": "Muistiinpano poistettu"
   },
