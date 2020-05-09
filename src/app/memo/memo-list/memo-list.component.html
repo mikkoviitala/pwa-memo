@@ -1,6 +1,6 @@
 <div class="memo-list-container">
   <!-- memo grid -->
-  <mat-grid-list cols="{{ mediaObserver.isActive('lt-md') ? 4 : 6 }}" rowHeight="150px" gutterSize="15px">
+  <mat-grid-list cols="{{ mediaObserver.isActive('lt-md') ? 4 : 8 }}" rowHeight="150px" gutterSize="15px">
     <mat-grid-tile
       [ngClass]="{ 'selected-memo' : memo.id === selectedMemoId }"
       *ngFor="let memo of memos | async" [colspan]="2" [rowspan]="1">

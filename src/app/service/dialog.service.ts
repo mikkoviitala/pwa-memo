@@ -23,7 +23,7 @@ export class DialogService {
   editMemo(memo: Memo): Observable<any> {
     return this._open(MemoEditorComponent, {
       disableClose: true,
-      minWidth: '310px',
+      width: '310px',
       data: {
         memo
       }

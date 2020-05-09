@@ -41,8 +41,8 @@
   }
 
   .description {
-    white-space: pre;
-    overflow-y: auto;
+    white-space: break-spaces;
+    overflow: hidden;
   }
 }
 

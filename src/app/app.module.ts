@@ -33,6 +33,7 @@ import {NgModule} from '@angular/core';
 import {translateConfig} from '../assets/translate-config';
 import localeFi from '@angular/common/locales/fi';
 import { NavigationRootComponent } from './navigation-root/navigation-root.component';
+import {MatLinkPreviewModule} from '@angular-material-extensions/link-preview';
 
 registerLocaleData(localeFi, 'fi');
 
@@ -67,7 +68,8 @@ registerLocaleData(localeFi, 'fi');
     ReactiveFormsModule,
     FlexLayoutModule,
     FormsModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    MatLinkPreviewModule.forRoot()
   ],
   providers: [
     DatePipe,

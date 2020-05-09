@@ -30,10 +30,15 @@
         name="description"
         matInput
         formControlName="description"
-        autocomplete="off">
+        autocomplete="off"
+        (ngModelChange)="descriptionSubject.next($event)">
       </textarea>
       <mat-error *ngIf="formGroup.controls['description'].hasError('maxlength')">{{ 'error.too-long' | translate }}</mat-error>
     </mat-form-field>
+
+    <!-- link preview -->
+    <mat-link-preview-container [multiple]="true"></mat-link-preview-container>
+
   </form>
 </mat-dialog-content>
 

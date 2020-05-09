@@ -67,6 +67,11 @@ a {
   padding: 30px;
   position: relative;
 
+  &:not(.mat-card-outlined) {
+    margin-top: -15px;
+    margin-bottom: 5px;
+  }
+
   &.mat-card-outlined {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0,0,0,.12);
     border-width: 1px;
@@ -103,6 +108,14 @@ a {
   }
 }
 
+.mat-card-title:not(.angular-material) {
+  font-size: small;
+}
+
+.mat-card-subtitle:not(.angular-material) {
+  font-size: small;
+}
+
 .mat-dialog-header {
   margin-bottom: 15px;
 }
@@ -115,7 +128,6 @@ a {
 .mat-dialog-container {
   overflow: hidden !important;
 }
-
 
 .form-field-suffix-icon {
   position: relative;
