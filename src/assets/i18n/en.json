@@ -31,6 +31,10 @@
   "user": {
     "logout": "Log out"
   },
+  "layout": {
+    "grid": "Grid view",
+    "row": "Row view"
+  },
   "memo": {
     "dialog": {
       "edit": {

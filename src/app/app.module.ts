@@ -34,6 +34,7 @@ import {translateConfig} from '../assets/translate-config';
 import localeFi from '@angular/common/locales/fi';
 import { NavigationRootComponent } from './navigation-root/navigation-root.component';
 import {MatLinkPreviewModule} from '@angular-material-extensions/link-preview';
+import { LayoutSelectorComponent } from './header/layout-selector/layout-selector.component';
 
 registerLocaleData(localeFi, 'fi');
 
@@ -55,7 +56,8 @@ registerLocaleData(localeFi, 'fi');
     MemoEditorComponent,
     FooterComponent,
     ConfirmDeleteMemoComponent,
-    NavigationRootComponent
+    NavigationRootComponent,
+    LayoutSelectorComponent
   ],
   imports: [
     BrowserModule,

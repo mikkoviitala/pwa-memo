@@ -8,12 +8,12 @@ import {first} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MemoService {
-  private memos: BehaviorSubject<Memo[]> = new BehaviorSubject<Memo[]>([]);
+  private readonly memos: BehaviorSubject<Memo[]> = new BehaviorSubject<Memo[]>([]);
 
   constructor() {
   }
 
-  get(): Observable<Memo[]> {
+  getMemos(): Observable<Memo[]> {
     this._getMemosFromServer();
     return this.memos.asObservable();
   }

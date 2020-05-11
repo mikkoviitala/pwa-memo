@@ -1,14 +1,16 @@
-<button mat-icon-button class="menu" [disabled]="disabled" [matMenuTriggerFor]="menu">
+<button mat-icon-button class="menu" [disabled]="!(user | async).isLoggedIn" [matMenuTriggerFor]="menu">
   <mat-icon>more_vert</mat-icon>
 </button>
 
 <mat-menu #menu="matMenu">
   <span mat-menu-item disabled>
     <mat-icon>face</mat-icon>
-    <strong>{{ user.name }}</strong>
+    <strong>{{ (user | async).name }}</strong>
   </span>
   <mat-divider></mat-divider>
-  <button mat-menu-item  (click)="logOut()">
+  <app-layout-selector></app-layout-selector>
+  <span mat-menu-item (click)="logOut()">
+    <mat-icon class="mat-primary">exit_to_app</mat-icon>
     <span>{{ 'user.logout' | translate }}</span>
-  </button>
+  </span>
 </mat-menu>

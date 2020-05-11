@@ -31,6 +31,10 @@
   "user": {
     "logout": "Kirjaudu ulos"
   },
+  "layout": {
+    "grid": "Taulukkonäkymä",
+    "row": "Rivinäkymä"
+  },
   "memo": {
     "dialog": {
       "edit": {

@@ -83,7 +83,7 @@ export class MemoEditorComponent implements OnInit, OnDestroy {
   }
 
   private _createLinkPreview(data: string): void {
-    const links: Link[] = this.linkifyService.find(data);
-    this.linkPreviewService.onLinkFound.emit(links && links.length >= 1 ? [links[0]] : []);
+      const links: Link[] = this.linkifyService.find(data || '');
+      this.linkPreviewService.onLinkFound.emit(links && links.length >= 1 ? [links[0]] : []);
   }
 }

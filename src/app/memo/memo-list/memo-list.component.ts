@@ -7,6 +7,7 @@ import {DialogService} from '../../service/dialog.service';
 import {SnackbarService} from '../../service/snackbar.service';
 import {finalize, tap} from 'rxjs/operators';
 import {MediaObserver} from '@angular/flex-layout';
+import {LayoutService} from '../../service/layout.service';
 
 @Component({
   selector: 'app-memo-list',
@@ -14,11 +15,13 @@ import {MediaObserver} from '@angular/flex-layout';
   styleUrls: ['./memo-list.component.scss']
 })
 export class MemoListComponent implements OnInit {
+  layout: Observable<string>;
   memos: Observable<Memo[]>;
   selectedMemoId: string;
 
   constructor(
     public mediaObserver: MediaObserver,
+    private layoutService: LayoutService,
     private memoService: MemoService,
     private dialogService: DialogService,
     private snackbarService: SnackbarService,
@@ -27,7 +30,8 @@ export class MemoListComponent implements OnInit {
 
   async ngOnInit() {
     await this.guard.canActivate();
-    this.memos = this.memoService.get()
+    this.layout = this.layoutService.getLayout();
+    this.memos = this.memoService.getMemos()
       .pipe(
         tap(next => next.sort((memo1, memo2) => memo2.date.localeCompare(memo1.date)))
       );

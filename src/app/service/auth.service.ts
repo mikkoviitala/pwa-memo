@@ -22,8 +22,7 @@ export class AuthService {
     isLoggedIn: false
   } as User;
 
-  private readonly userState = new BehaviorSubject<User>(this.unknownUser);
-  readonly user = this.userState.asObservable();
+  private readonly user = new BehaviorSubject<User>(this.unknownUser);
 
   constructor(private snackbarService: SnackbarService) {
     // Get the user on creation of this service
@@ -36,6 +35,10 @@ export class AuthService {
     Hub.listen('auth', ({payload: {event, data}}) => {
       this._handleHubResponse(event, data);
     });
+  }
+
+  getUser(): Observable<User> {
+    return this.user.asObservable();
   }
 
   isAuthenticated(): Promise<any> {
@@ -107,12 +110,12 @@ export class AuthService {
 
   private _setUser(cognitoUser: any) {
     if (cognitoUser) {
-      this.userState.next({
+      this.user.next({
         name: cognitoUser.username,
         isLoggedIn: true
       });
     } else {
-      this.userState.next(this.unknownUser);
+      this.user.next(this.unknownUser);
     }
   }
 }

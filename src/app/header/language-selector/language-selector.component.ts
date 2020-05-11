@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../../../environments/environment';
+import {LocalStorageService} from '../../service/local-storage.service';
 
 @Component({
   selector: 'app-language-selector',
@@ -10,7 +11,9 @@ import {environment} from '../../../environments/environment';
 export class LanguageSelectorComponent implements OnInit {
   selectedLanguage: string;
 
-  constructor(private translateService: TranslateService) {
+  constructor(
+    private translateService: TranslateService,
+    private localStorageService: LocalStorageService) {
   }
 
   ngOnInit(): void {
@@ -18,8 +21,9 @@ export class LanguageSelectorComponent implements OnInit {
   }
 
   toggleLanguage(): void {
-    const lang = environment.languages.filter(l => l !== this.selectedLanguage)[0];
-    this.selectedLanguage = lang;
-    this.translateService.use(lang);
+    const language = environment.languages.filter(l => l !== this.selectedLanguage)[0];
+    this.selectedLanguage = language;
+    this.translateService.use(language);
+    this.localStorageService.setLanguage(language);
   }
 }
