@@ -32,8 +32,8 @@
     "logout": "Kirjaudu ulos"
   },
   "layout": {
-    "grid": "Taulukkonäkymä",
-    "row": "Rivinäkymä"
+    "toggle_grid": "Rivinäkymä",
+    "toggle_row": "Taulukkonäkymä"
   },
   "memo": {
     "dialog": {
@@ -41,14 +41,10 @@
         "header": "Muistiinpano",
         "name": "Otsikko"
       },
-      "delete": {
-        "header": "Vahvista",
-        "message": "Poistetaanko valittu muistiinpano?"
-      },
-      "remove": "Poista",
       "save": "Tallenna",
       "cancel": "Peruuta"
-    }
+    },
+    "no-memos": "Sinulla ei ole muistiinpanoja"
   },
   "success": {
     "code": "Vahvistuskoodi hyväksytty",

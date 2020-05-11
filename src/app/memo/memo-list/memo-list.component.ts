@@ -8,24 +8,19 @@ import {SnackbarService} from '../../service/snackbar.service';
 import {tap} from 'rxjs/operators';
 import {MediaObserver} from '@angular/flex-layout';
 import {LayoutService} from '../../service/layout.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {fadeInOut} from '../../animation/fade-in-out';
 
 @Component({
   selector: 'app-memo-list',
   templateUrl: './memo-list.component.html',
   styleUrls: ['./memo-list.component.scss'],
-  animations: [
-    trigger('fadeInOut', [
-      state('void', style({
-        opacity: 0
-      })),
-      transition('void <=> *', animate(600)),
-    ])]
+  animations: [fadeInOut]
 })
 export class MemoListComponent implements OnInit {
   layout: Observable<string>;
   memos: Observable<Memo[]>;
   selectedMemoId: string;
+  noMemos: boolean;
 
   constructor(
     public mediaObserver: MediaObserver,
@@ -41,7 +36,12 @@ export class MemoListComponent implements OnInit {
     this.layout = this.layoutService.getLayout();
     this.memos = this.memoService.getMemos()
       .pipe(
-        tap(next => next.sort((memo1, memo2) => memo2.date.localeCompare(memo1.date)))
+        tap(next => {
+          if (next) {
+            next.sort((memo1, memo2) => memo2.date.localeCompare(memo1.date));
+          }
+          this.noMemos = next && next.length === 0;
+        })
       );
   }
 

@@ -8,7 +8,7 @@ import {first} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MemoService {
-  private readonly memos: BehaviorSubject<Memo[]> = new BehaviorSubject<Memo[]>([]);
+  private readonly memos: BehaviorSubject<Memo[]> = new BehaviorSubject<Memo[]>(null);
 
   constructor() {
   }

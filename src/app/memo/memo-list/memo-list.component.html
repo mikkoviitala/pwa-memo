@@ -8,9 +8,17 @@
         <app-memo-list-item [memo]="memo" (update)="updateMemo($event)" (delete)="deleteMemo($event)"></app-memo-list-item>
     </mat-grid-tile>
   </mat-grid-list>
+
+  <div *ngIf="noMemos" fxLayout="row" fxLayoutAlign="center start">
+    <div class="no-memos" fxLayout="row" fxLayoutAlign="center start">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ 'memo.no-memos' | translate }}</span>
+    </div>
+  </div>
+
 </div>
 
 <!-- add memo -->
-<button mat-fab color="primary" class="app-footer-fab-button" (click)="insertMemo()">
+<button mat-fab color="accent" class="app-footer-fab-button" (click)="insertMemo()">
   <mat-icon>add</mat-icon>
 </button>

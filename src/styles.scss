@@ -8,6 +8,12 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
 html {
   height: 100%;
   overflow: hidden !important;
@@ -16,7 +22,7 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background-color: #eeeeee;
+  background-color: #efefef;
   overflow: hidden;
 }
 
@@ -27,7 +33,7 @@ a {
 
 .snackbar {
   color: #ffffff;
-  background-color: map_get($mat-indigo, A200);
+  background-color: map_get($mat-indigo, 400);
 
   span {
     margin: auto;

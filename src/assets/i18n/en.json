@@ -32,8 +32,8 @@
     "logout": "Log out"
   },
   "layout": {
-    "grid": "Grid view",
-    "row": "Row view"
+    "toggle_grid": "Row view",
+    "toggle_row": "Grid view"
   },
   "memo": {
     "dialog": {
@@ -41,14 +41,10 @@
         "header": "Memo",
         "name": "Title"
       },
-      "delete": {
-        "header": "Confirm",
-        "message": "Remove selected memo?"
-      },
-      "remove": "Remove",
       "save": "Save",
       "cancel": "Cancel"
-    }
+    },
+    "no-memos": "Your list of memos is empty"
   },
   "success": {
     "code": "Verification code accepted",

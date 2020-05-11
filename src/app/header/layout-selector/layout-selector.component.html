@@ -1,4 +1,4 @@
 <span mat-menu-item (click)="toggleLayout()" fxLayout="row" fxLayoutAlign="start center">
-    <img src="../../../assets/images/{{ layout | async}}.png" class="layout-selector-image" alt="layout">
-    <span class="layout-selector-text">{{ 'layout.' + (layout | async) | translate }}</span>
+    <img src="../../../assets/images/toggle_{{ layout | async}}.png" class="layout-selector-image" alt="layout">
+    <span class="layout-selector-text">{{ 'layout.toggle_' + (layout | async) | translate }}</span>
 </span>

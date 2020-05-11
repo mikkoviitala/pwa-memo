@@ -3,9 +3,9 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 import {Memo} from '../../../model/memo.class';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatLinkPreviewService} from '@angular-material-extensions/link-preview';
-import { NgxLinkifyjsService, Link } from 'ngx-linkifyjs';
+import {Link, NgxLinkifyjsService} from 'ngx-linkifyjs';
 import {Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 
 @Component({
@@ -31,7 +31,6 @@ export class MemoEditorComponent implements OnInit, OnDestroy {
     this.memo = this.data.memo;
     this._initializeForm();
     this._setDisabled();
-    this._focusDescription();
     this._watchDescriptionForLinks();
   }
 
@@ -58,21 +57,6 @@ export class MemoEditorComponent implements OnInit, OnDestroy {
     });
   }
 
-  private _setDisabled(): void {
-    this.disabled = !this.memo || (this._getValue(this.memo.name) === null && this._getValue(this.memo.description) === null);
-  }
-
-  private _focusDescription(): void {
-    const timeout = setTimeout(() => {
-      document.getElementById('description_id').focus();
-      clearTimeout(timeout);
-    }, 250);
-  }
-
-  private _getValue(value: string): string {
-    return (value !== null && value.length > 0) ? value : null;
-  }
-
   private _watchDescriptionForLinks() {
     this._createLinkPreview(this.memo.description);
 
@@ -83,7 +67,15 @@ export class MemoEditorComponent implements OnInit, OnDestroy {
   }
 
   private _createLinkPreview(data: string): void {
-      const links: Link[] = this.linkifyService.find(data || '');
-      this.linkPreviewService.onLinkFound.emit(links && links.length >= 1 ? [links[0]] : []);
+    const links: Link[] = this.linkifyService.find(data || '');
+    this.linkPreviewService.onLinkFound.emit(links && links.length >= 1 ? [links[0]] : []);
+  }
+
+  private _setDisabled(): void {
+    this.disabled = !this.memo || (this._getValue(this.memo.name) === null && this._getValue(this.memo.description) === null);
+  }
+
+  private _getValue(value: string): string {
+    return (value !== null && value.length > 0) ? value : null;
   }
 }
