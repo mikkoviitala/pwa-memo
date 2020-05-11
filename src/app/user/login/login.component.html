@@ -6,41 +6,42 @@
       <mat-card-title class="angular-material">{{ 'login.header' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form
-        [formGroup]="formGroup"
-        fxLayout="row"
-        fxLayoutGap="10px"
-        fxLayout.lt-sm="column"
-        fxLayoutGap.lt-sm="0px"
-        fxLayoutAlign="start"
-        fxLayoutAlign.lt-sm="space-evenly start">
+      <form [formGroup]="formGroup">
 
-        <!-- user name -->
-        <mat-form-field>
-          <input
-            type="text"
-            matInput
-            formControlName="username"
-            autocomplete="off"
-            [placeholder]="'login.username' | translate">
-          <mat-icon class="form-field-suffix-icon" matSuffix>person</mat-icon>
-          <mat-error></mat-error>
-        </mat-form-field>
+        <div fxLayout="row"
+             fxLayoutGap="10px"
+             fxLayout.lt-sm="column"
+             fxLayoutGap.lt-sm="0px"
+             fxLayoutAlign="start"
+             fxLayoutAlign.lt-sm="space-evenly start">
 
-        <!-- password -->
-        <mat-form-field>
-          <input
-            type="password"
-            matInput
-            formControlName="password"
-            autocomplete="off"
-            [placeholder]="'login.password' | translate">
-          <mat-icon class="form-field-suffix-icon" matSuffix>lock</mat-icon>
-          <mat-error></mat-error>
-        </mat-form-field>
+          <!-- user name -->
+          <mat-form-field>
+            <input
+              type="text"
+              matInput
+              formControlName="username"
+              autocomplete="off"
+              [placeholder]="'login.username' | translate">
+            <mat-icon class="form-field-suffix-icon" matSuffix>person</mat-icon>
+            <mat-error></mat-error>
+          </mat-form-field>
+
+          <!-- password -->
+          <mat-form-field>
+            <input
+              type="password"
+              matInput
+              formControlName="password"
+              autocomplete="off"
+              [placeholder]="'login.password' | translate">
+            <mat-icon class="form-field-suffix-icon" matSuffix>lock</mat-icon>
+            <mat-error></mat-error>
+          </mat-form-field>
+        </div>
 
         <!-- remember me -->
-        <mat-checkbox class="example-margin" formControlName="rememberMe" color="primary">{{ 'login.remember-me' | translate }}</mat-checkbox>
+        <mat-checkbox  class="example-margin" formControlName="rememberMe" color="primary">{{ 'login.remember-me' | translate }}</mat-checkbox>
       </form>
     </mat-card-content>
 

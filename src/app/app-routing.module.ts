@@ -29,7 +29,7 @@ const routes: Routes = [
         path: 'resetpassword',
         component: ResetPasswordComponent,
         canActivate: [UnauthenticatedGuardService]
-      },]
+      }]
   },
   {
     path: 'registration',
