@@ -4,7 +4,7 @@
     cols="{{ (layout | async) === 'grid' ? (mediaObserver.isActive('lt-md') ? 4 : 8) : 2 }}" rowHeight="150px" gutterSize="15px">
     <mat-grid-tile
       [ngClass]="{ 'selected-memo' : memo.id === selectedMemoId }"
-      *ngFor="let memo of memos | async" [colspan]="2" [rowspan]="1">
+      *ngFor="let memo of memos | async" [colspan]="2" [rowspan]="1" [@fadeInOut]>
         <app-memo-list-item [memo]="memo" (update)="updateMemo($event)" (delete)="deleteMemo($event)"></app-memo-list-item>
     </mat-grid-tile>
   </mat-grid-list>

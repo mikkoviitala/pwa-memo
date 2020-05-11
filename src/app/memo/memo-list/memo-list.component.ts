@@ -5,14 +5,22 @@ import {Memo} from '../../model/memo.class';
 import {MemoService} from '../../service/memo.service';
 import {DialogService} from '../../service/dialog.service';
 import {SnackbarService} from '../../service/snackbar.service';
-import {finalize, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {MediaObserver} from '@angular/flex-layout';
 import {LayoutService} from '../../service/layout.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-memo-list',
   templateUrl: './memo-list.component.html',
-  styleUrls: ['./memo-list.component.scss']
+  styleUrls: ['./memo-list.component.scss'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition('void <=> *', animate(600)),
+    ])]
 })
 export class MemoListComponent implements OnInit {
   layout: Observable<string>;

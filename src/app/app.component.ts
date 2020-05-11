@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments/environment';
 import {LocalStorageService} from './service/local-storage.service';
@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(
     private translateService: TranslateService,
     private localStorageService: LocalStorageService) {
-      this.translateService.use(localStorageService.getLanguage() || environment.defaultLanguage);
+    this.translateService.use(localStorageService.getLanguage() || environment.defaultLanguage);
   }
 }
