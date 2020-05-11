@@ -13,13 +13,6 @@ export class DialogService {
   constructor(private dialog: MatDialog) {
   }
 
-  confirmDeleteMemo(): Observable<any> {
-    return this._open(ConfirmDeleteMemoComponent, {
-      disableClose: true,
-      data: {}
-    });
-  }
-
   editMemo(memo: Memo): Observable<any> {
     return this._open(MemoEditorComponent, {
       disableClose: true,

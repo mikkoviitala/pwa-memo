@@ -28,9 +28,14 @@ a {
 .snackbar {
   color: #ffffff;
   background-color: map_get($mat-indigo, A200);
+
   span {
     margin: auto;
     text-align: center;
+  }
+
+  button {
+    color: #ffffff;
   }
 }
 

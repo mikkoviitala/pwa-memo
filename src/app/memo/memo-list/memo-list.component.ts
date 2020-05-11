@@ -61,16 +61,14 @@ export class MemoListComponent implements OnInit {
   }
 
   deleteMemo(memo: Memo): void {
-    this.selectedMemoId = memo.id;
-    this.dialogService.confirmDeleteMemo()
-      .pipe(
-        finalize(() => this.selectedMemoId = null)
-      )
-      .subscribe((confirmed) => {
-        if (confirmed) {
-          this.memoService.delete(memo);
-          this.snackbarService.show('success.memo-deleted');
-        }
-      }, () => this.snackbarService.show('error.memo-deleted'));
+    const copy = new Memo();
+    Object.assign(copy, memo);
+
+    this.memoService.delete(memo);
+    this.snackbarService.show('success.memo-deleted');
+
+    this.snackbarService.showUndo('success.memo-deleted')
+      .onAction()
+      .subscribe(() => this.memoService.insert(copy));
   }
 }

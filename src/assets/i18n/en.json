@@ -54,6 +54,7 @@
     "code": "Verification code accepted",
     "password": "Password has been changed",
     "resend-code": "Verification code sent",
+    "memo-edited": "Memo saved",
     "memo-deleted": "Memo deleted"
   },
   "error": {
