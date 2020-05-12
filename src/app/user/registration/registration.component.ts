@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
       ).subscribe(async (next) => {
       if (next) {
         this.localStorageService.setRegisteredUser(next.user.getUsername());
-        await this.router.navigate(['/confirm']);
+        await this.router.navigate(['/login/confirm']);
       }
     });
   }

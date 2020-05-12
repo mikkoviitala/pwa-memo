@@ -30,7 +30,7 @@ export class ConfirmRegistrationComponent implements OnInit {
 
     this.userName = this.localStorageService.getRegisteredUser();
     if (!this.userName) {
-      await this.router.navigate(['/registration']);
+      await this.router.navigate(['/login/registration']);
     }
   }
 
