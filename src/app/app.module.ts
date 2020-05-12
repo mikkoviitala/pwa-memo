@@ -16,6 +16,8 @@ import localeFi from '@angular/common/locales/fi';
 import {CoreModule} from './core/core.module';
 import {MemoModule} from './memo/memo.module';
 import {UserModule} from './user/user.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localeFi, 'fi');
 
@@ -37,7 +39,8 @@ registerLocaleData(localeFi, 'fi');
     ReactiveFormsModule,
     FlexLayoutModule,
     FormsModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     AmplifyService,
