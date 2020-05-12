@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatSnackBarRef} from '@angular/material/snack-bar/typings/snack-bar-ref';
 import {SimpleSnackBar} from '@angular/material/snack-bar/typings/simple-snack-bar';
+import {LocalStorageService} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class SnackbarService {
 
   constructor(
     private snackbar: MatSnackBar,
+    private localStorage: LocalStorageService,
     private translate: TranslateService) {
   }
 
@@ -25,20 +27,20 @@ export class SnackbarService {
   }
 
   showUndo(message: string, params?: any): MatSnackBarRef<SimpleSnackBar> {
+    this.translate.use(this.localStorage.getLanguage());
     return this._open(
       message,
       params || null,
-      'common.undo',
+      this.translate.instant('common.undo'),
       this.undoDuration);
   }
 
   private _open(message: string, params: any, action: string, duration: number): MatSnackBarRef<SimpleSnackBar> {
     const content = params ? this.translate.instant(message, params) : this.translate.instant(message);
-    const buttonText = action ? this.translate.instant(action) : null;
 
     return this.snackbar.open(
       content,
-      buttonText, {
+      action, {
         duration,
         panelClass: 'snackbar' /* ['mat-toolbar', 'mat-primary'] */
       });
