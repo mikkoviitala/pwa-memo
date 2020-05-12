@@ -1,4 +1,7 @@
 {
+  "common":  {
+    "undo": "Undo"
+  },
   "toolbar": {
     "header": "Memo"
   },

@@ -1,4 +1,7 @@
 {
+  "common":  {
+    "undo": "Peruuta"
+  },
   "toolbar": {
     "header": "Memo"
   },
