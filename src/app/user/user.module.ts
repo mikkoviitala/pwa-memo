@@ -11,7 +11,6 @@ import {FlexModule} from '@angular/flex-layout';
 import {AppRoutingModule} from '../app-routing.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {CoreModule} from '../core/core.module';
-import {MemoModule} from '../memo/memo.module';
 import {UserRoutingModule} from './user-routing.module';
 
 @NgModule({
