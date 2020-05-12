@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../service/auth.service';
-import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.guard';
-import {SnackbarService} from '../../service/snackbar.service';
-import {ResetPassword} from '../../model/reset-password.interface';
-import {LocalStorageService} from '../../service/local-storage.service';
+import {AuthService} from '../../core/services/auth.service';
+import {UnauthenticatedGuardService} from '../../core/guards/unauthenticated.guard';
+import {SnackbarService} from '../../core/services/snackbar.service';
+import {LocalStorageService} from '../../core/services/local-storage.service';
 import {finalize} from 'rxjs/operators';
+import {ResetPassword} from '../../core/models/reset-password.interface';
 
 @Component({
   selector: 'app-reset-password',
@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
       .subscribe(async () => {
         this.localStorageService.deleteRegisteredUser();
         this.snackbarService.show('success.password');
-        await this.router.navigate(['login']);
+        await this.router.navigate(['/login']);
       }, () => {
         this.snackbarService.show('error.password');
       });

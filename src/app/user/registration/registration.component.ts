@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../service/auth.service';
+import {AuthService} from '../../core/services/auth.service';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types/Auth';
 import {finalize} from 'rxjs/operators';
-import {LocalStorageService} from '../../service/local-storage.service';
+import {LocalStorageService} from '../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-registration',
@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
       ).subscribe(async (next) => {
       if (next) {
         this.localStorageService.setRegisteredUser(next.user.getUsername());
-        await this.router.navigate(['registration/confirm']);
+        await this.router.navigate(['/confirm']);
       }
     });
   }

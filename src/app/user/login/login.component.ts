@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {SignInOpts} from '@aws-amplify/auth/src/types/Auth';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../service/auth.service';
+import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
-import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.guard';
+import {UnauthenticatedGuardService} from '../../core/guards/unauthenticated.guard';
 import {finalize} from 'rxjs/operators';
-import {LocalStorageService} from '../../service/local-storage.service';
+import {LocalStorageService} from '../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-login',

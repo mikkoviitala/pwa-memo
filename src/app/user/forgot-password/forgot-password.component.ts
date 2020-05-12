@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../service/auth.service';
-import {SnackbarService} from '../../service/snackbar.service';
-import {UnauthenticatedGuardService} from '../../service/guard/unauthenticated.guard';
+import {AuthService} from '../../core/services/auth.service';
+import {SnackbarService} from '../../core/services/snackbar.service';
+import {UnauthenticatedGuardService} from '../../core/guards/unauthenticated.guard';
 import {finalize} from 'rxjs/operators';
-import {LocalStorageService} from '../../service/local-storage.service';
+import {LocalStorageService} from '../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -40,7 +40,7 @@ export class ForgotPasswordComponent implements OnInit {
       .subscribe(async (next: any) => {
         if (next) {
           this.localStorageService.setRegisteredUser(this.username);
-          await this.router.navigate(['login/resetpassword']);
+          await this.router.navigate(['/resetpassword']);
         } else {
           this.snackbarService.show('error.user');
         }

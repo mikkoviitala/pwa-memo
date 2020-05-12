@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments/environment';
-import {LocalStorageService} from './service/local-storage.service';
+import {LocalStorageService} from './core/services/local-storage.service';
 
 @Component({
   selector: 'app-root',

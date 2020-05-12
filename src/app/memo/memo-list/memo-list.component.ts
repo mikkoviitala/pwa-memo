@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AuthenticatedGuard} from '../../service/guard/authenticated.guard';
-import {Memo} from '../../model/memo.class';
-import {MemoService} from '../../service/memo.service';
-import {DialogService} from '../../service/dialog.service';
-import {SnackbarService} from '../../service/snackbar.service';
+import {AuthenticatedGuard} from '../../core/guards/authenticated.guard';
+import {DialogService} from '../../core/services/dialog.service';
+import {SnackbarService} from '../../core/services/snackbar.service';
 import {tap} from 'rxjs/operators';
 import {MediaObserver} from '@angular/flex-layout';
-import {LayoutService} from '../../service/layout.service';
-import {fadeInOut} from '../../animation/fade-in-out';
+import {fadeInOut} from '../../core/animations/fade-in-out';
+import {LayoutService} from '../../core/services/layout.service';
+import {MemoService} from '../../core/services/memo.service';
+import {Memo} from '../../core/models/memo.class';
+
 
 @Component({
   selector: 'app-memo-list',

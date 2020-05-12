@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../service/auth.service';
-import {SnackbarService} from '../../service/snackbar.service';
-import {LocalStorageService} from '../../service/local-storage.service';
+import {AuthService} from '../../core/services/auth.service';
+import {SnackbarService} from '../../core/services/snackbar.service';
+import {LocalStorageService} from '../../core/services/local-storage.service';
 import {finalize} from 'rxjs/operators';
 
 @Component({
@@ -30,7 +30,7 @@ export class ConfirmRegistrationComponent implements OnInit {
 
     this.userName = this.localStorageService.getRegisteredUser();
     if (!this.userName) {
-      await this.router.navigate(['registration']);
+      await this.router.navigate(['/registration']);
     }
   }
 
@@ -45,7 +45,7 @@ export class ConfirmRegistrationComponent implements OnInit {
         if (next) {
           this.localStorageService.deleteRegisteredUser();
           this.localStorageService.deleteLoggedInUser();
-          await this.router.navigate(['login']);
+          await this.router.navigate(['/login']);
         }
       });
   }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Memo} from '../../model/memo.class';
+import {Memo} from '../../core/models/memo.class';
 
 @Component({
   selector: 'app-memo-list-item',
