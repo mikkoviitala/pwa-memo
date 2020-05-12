@@ -30,7 +30,7 @@ export class ConfirmRegistrationComponent implements OnInit {
 
     this.userName = this.localStorageService.getRegisteredUser();
     if (!this.userName) {
-      await this.router.navigate(['/login/registration']);
+      await this.router.navigate(['login/registration']);
     }
   }
 
@@ -45,7 +45,7 @@ export class ConfirmRegistrationComponent implements OnInit {
         if (next) {
           this.localStorageService.deleteRegisteredUser();
           this.localStorageService.deleteLoggedInUser();
-          await this.router.navigate(['/login']);
+          await this.router.navigate(['login']);
         }
       });
   }

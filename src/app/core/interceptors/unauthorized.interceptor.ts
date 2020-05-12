@@ -21,7 +21,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
       catchError((error) => {
           if (this._isUnauthorized(error) && !this.isLoginRoute()) {
             this.authService.revoke()
-              .then(() => this.router.navigate(['/login'])
+              .then(() => this.router.navigate(['login'])
               .then(() => window.location.reload()));
           }
           throw error;

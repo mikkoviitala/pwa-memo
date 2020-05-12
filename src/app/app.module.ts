@@ -7,7 +7,7 @@ import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material
 import {FlexLayoutModule, FlexModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {registerLocaleData} from '@angular/common';
+import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angular/common';
 import {MaterialComponentsModule} from './material-components/material-components.module';
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
@@ -16,8 +16,8 @@ import localeFi from '@angular/common/locales/fi';
 import {CoreModule} from './core/core.module';
 import {MemoModule} from './memo/memo.module';
 import {UserModule} from './user/user.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 registerLocaleData(localeFi, 'fi');
 
@@ -40,11 +40,13 @@ registerLocaleData(localeFi, 'fi');
     FlexLayoutModule,
     FormsModule,
     MaterialComponentsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
   providers: [
     AmplifyService,
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   entryComponents: [],
   bootstrap: [AppComponent]

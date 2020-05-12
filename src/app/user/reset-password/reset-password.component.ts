@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
       .subscribe(async () => {
         this.localStorageService.deleteRegisteredUser();
         this.snackbarService.show('success.password');
-        await this.router.navigate(['/login']);
+        await this.router.navigate(['login']);
       }, () => {
         this.snackbarService.show('error.password');
       });

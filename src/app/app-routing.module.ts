@@ -12,11 +12,6 @@ import {AuthenticatedGuard} from './core/guards/authenticated.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'memo'
-  },
-  {
     path: 'login',
     component: NavigationRootComponent,
     canActivate: [UnauthenticatedGuardService],
@@ -46,7 +41,16 @@ const routes: Routes = [
     path: 'memo',
     component: MemoListComponent,
     canActivate: [AuthenticatedGuard]
-  }
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'memo'
+  },
+  {
+    path: '**',
+    component: MemoListComponent
+  },
 ];
 
 @NgModule({

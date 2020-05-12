@@ -9,6 +9,6 @@ import {BaseGuard} from './base.guard';
 export class AuthenticatedGuard extends BaseGuard implements CanActivate {
   constructor(protected router: Router, protected authService: AuthService) {
     super(router, authService);
-    this.redirectTo = '/login';
+    this.redirectTo = 'login';
   }
 }
