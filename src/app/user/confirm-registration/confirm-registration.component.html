@@ -1,0 +1,52 @@
+<app-card-layout>
+  <!-- confirm registration card -->
+  <mat-card *ngIf="!inProgress" class="mat-card-outlined confirm-registration">
+    <mat-card-title class="angular-material">{{ 'registration.header' | translate }}</mat-card-title>
+    <mat-card-content>
+      <div>{{ 'registration.message' | translate }}</div>
+      <br>
+      <form
+        [formGroup]="formGroup"
+        fxLayout="row"
+        fxLayoutGap="10px"
+        fxLayout.sm="column"
+        fxLayoutGap.sm="0px"
+        fxLayout.xs="column"
+        fxLayoutGap.xs="0px"
+        fxLayoutAlign="start">
+
+        <!-- verification code -->
+        <mat-form-field fxFlex>
+          <input
+            type="text"
+            maxlength="10"
+            matInput
+            formControlName="code"
+            autocomplete="off"
+            [placeholder]="'registration.code' | translate">
+          <label matSuffix>*</label>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-dialog-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        [disabled]="formGroup?.invalid || formGroup?.pristine"
+        (click)="verify()">{{ 'registration.confirm' | translate }}
+      </button>
+    </mat-dialog-actions>
+
+    <div class="mat-dialog-link">
+      <a href="javascript:void(0)" (click)="resendVerificationCode()">{{ 'registration.resend-code' | translate }}</a>
+    </div>
+  </mat-card>
+
+  <!-- spinner -->
+  <div *ngIf="inProgress" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</app-card-layout>
+

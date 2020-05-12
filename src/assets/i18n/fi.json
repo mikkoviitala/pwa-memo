@@ -1,0 +1,68 @@
+{
+  "toolbar": {
+    "header": "Memo"
+  },
+  "login": {
+    "header": "Kirjaudu sisään",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "remember-me": "Muista minut",
+    "continue": "Kirjaudu"
+  },
+  "registration": {
+    "header": "Uusi käyttäjä",
+    "email": "Sähköposti",
+    "username": "Käyttäjätunnus",
+    "password": "Salasana",
+    "message": "Vahvista rekisteröitymisesi koodilla, joka on lähetetty sähköpostiisi.",
+    "code": "Vahvistuskoodi",
+    "continue": "Rekisteröidy",
+    "confirm": "Vahvista",
+    "resend-code": "Lähetä vahvistuskoodi uudelleen"
+  },
+  "forgot-password": {
+    "header-request": "Unohtuiko salasana?",
+    "header-reset": "Vaihda salasanasi",
+    "message-request": "Saat vahvistuskoodin sähköpostiisi.",
+    "message-reset": "Vahvistuskoodi on lähetetty sähköpostiisi.",
+    "new-password": "Uusi salasana",
+    "confirm": "Lähetä"
+  },
+  "user": {
+    "logout": "Kirjaudu ulos"
+  },
+  "layout": {
+    "toggle_grid": "Rivinäkymä",
+    "toggle_row": "Taulukkonäkymä"
+  },
+  "memo": {
+    "dialog": {
+      "edit": {
+        "header": "Muistiinpano",
+        "name": "Otsikko"
+      },
+      "save": "Tallenna",
+      "cancel": "Peruuta"
+    },
+    "no-memos": "Sinulla ei ole muistiinpanoja"
+  },
+  "success": {
+    "code": "Vahvistuskoodi hyväksytty",
+    "password": "Salasanasi on vaihdettu",
+    "resend-code": "Vahvistuskoodi lähetetty",
+    "memo-edited": "Muistiinpano tallennettu",
+    "memo-deleted": "Muistiinpano poistettu"
+  },
+  "error": {
+    "too-short": "Liian lyhyt",
+    "too-long": "Liian pitkä",
+    "invalid-credentials": "Väärä käyttäjätunnus tai salasana",
+    "user-exists": "Käyttäjä on jo olemassa",
+    "resend-code": "Vahvistuskoodin lähetys epäonnistui",
+    "invalid-code": "Virheellinen vahvistuskoodi",
+    "user": "Käyttäjätunnusta ei löydy",
+    "password": "Salasanan vaihto epäonnistui",
+    "unknown-error": "Tapahtui virhe: {{ param }}",
+    "memo-deleted": "Muistiinpanon poisto ei onnistunut"
+  }
+}

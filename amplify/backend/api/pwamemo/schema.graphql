@@ -1,0 +1,6 @@
+type Memo @model @aws_cognito_user_pools @auth(rules: [{allow: owner}]) {
+  id: ID!
+  name: String
+  description: String
+  date: AWSDateTime
+}
