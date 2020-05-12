@@ -20,7 +20,7 @@ export class MemoEditorComponent implements OnInit, OnDestroy {
   descriptionSubject = new Subject<string>();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private linkifyService: NgxLinkifyjsService,
     private linkPreviewService: MatLinkPreviewService,
     private formBuilder: FormBuilder) {
