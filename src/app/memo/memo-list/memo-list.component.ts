@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {AuthenticatedGuard} from '../../core/guards/authenticated.guard';
 import {DialogService} from '../../core/services/dialog.service';
 import {SnackbarService} from '../../core/services/snackbar.service';
-import {tap} from 'rxjs/operators';
+import {first, map, tap} from 'rxjs/operators';
 import {MediaObserver} from '@angular/flex-layout';
 import {fadeInOut} from '../../core/animations/fade-in-out';
 import {LayoutService} from '../../core/services/layout.service';
@@ -37,9 +37,10 @@ export class MemoListComponent implements OnInit {
     this.layout = this.layoutService.getLayout();
     this.memos = this.memoService.getMemos()
       .pipe(
-        tap(next => {
+        map(next => {
           if (next) {
             next.sort((memo1, memo2) => memo2.date.localeCompare(memo1.date));
+            return next;
           }
           this.noMemos = next && next.length === 0;
         })
@@ -48,6 +49,7 @@ export class MemoListComponent implements OnInit {
 
   insertMemo(): void {
     this.dialogService.editMemo(new Memo())
+      .pipe(first())
       .subscribe((next) => {
         if (next) {
           this.memoService.insert(next);
@@ -61,6 +63,7 @@ export class MemoListComponent implements OnInit {
     Object.assign(copy, memo);
 
     this.dialogService.editMemo(copy)
+      .pipe(first())
       .subscribe((next) => {
         if (next) {
           this.memoService.update(next);
@@ -74,10 +77,10 @@ export class MemoListComponent implements OnInit {
     Object.assign(copy, memo);
 
     this.memoService.delete(memo);
-    this.snackbarService.show('success.memo-deleted');
 
     this.snackbarService.showUndo('success.memo-deleted')
       .onAction()
+      .pipe(first())
       .subscribe(() => this.memoService.insert(copy));
   }
 }
