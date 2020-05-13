@@ -44,7 +44,7 @@ export class MemoEditorComponent implements OnInit, OnDestroy {
         this.memo.name, [Validators.maxLength(30)]
       ],
       description: [
-        this.memo.description, [Validators.max(1000)]
+        this.memo.description, [Validators.maxLength(1000)]
       ]
     }, {
       updateOn: 'change',
