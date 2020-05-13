@@ -56,13 +56,13 @@
 
     <mat-card-footer>
       <div class="mat-dialog-link" fxLayout="column">
-        <a routerLink="login/forgotpassword" fxFlex>{{ 'forgot-password.header-request' | translate }}</a>
+        <a routerLink="/login/forgotpassword" fxFlex>{{ 'forgot-password.header-request' | translate }}</a>
       </div>
     </mat-card-footer>
   </mat-card>
 
   <!-- registration -->
-  <button *ngIf="!inProgress" mat-fab color="accent" class="mat-card-fab-button" routerLink="login/registration">
+  <button *ngIf="!inProgress" mat-fab color="accent" class="mat-card-fab-button" routerLink="/login/registration">
     <mat-icon>person_add</mat-icon>
   </button>
 

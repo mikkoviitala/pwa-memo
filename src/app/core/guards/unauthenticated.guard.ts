@@ -10,6 +10,6 @@ export class UnauthenticatedGuardService extends BaseGuard implements CanActivat
   constructor(protected router: Router, protected authService: AuthService) {
     super(router, authService);
     this.invertCanActivate = true;
-    this.redirectTo = 'memo';
+    this.redirectTo = '/memo';
   }
 }
