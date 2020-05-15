@@ -17,11 +17,11 @@ export class LocalStorageService {
   constructor() {
   }
 
-  getRegisteredUser(): string {
+  get registeredUser(): string {
     return localStorage.getItem(constants.REGISTERED_USER) || null;
   }
 
-  setRegisteredUser(username: string): void {
+  set registeredUser(username: string) {
     localStorage.setItem(constants.REGISTERED_USER, username);
   }
 
@@ -29,11 +29,11 @@ export class LocalStorageService {
     localStorage.removeItem(constants.REGISTERED_USER);
   }
 
-  getLoggedInUser(): string {
+  get loggedInUser(): string {
     return localStorage.getItem(constants.LOGGED_IN_USER) || null;
   }
 
-  setLoggedInUser(username: string): void {
+  set loggedInUser(username: string) {
     localStorage.setItem(constants.LOGGED_IN_USER, username);
   }
 
@@ -41,28 +41,28 @@ export class LocalStorageService {
     localStorage.removeItem(constants.LOGGED_IN_USER);
   }
 
-  getRememberMe(): boolean {
+  get rememberMe(): boolean {
     return localStorage.getItem(constants.REMEMBER_ME) === 'true' || false;
   }
 
-  setRememberMe(remember: boolean): void {
+  set rememberMe(remember: boolean) {
     localStorage.setItem(constants.REMEMBER_ME, remember ? 'true' : 'false');
   }
 
-  getLanguage(): string {
+  get language(): string {
     const language = localStorage.getItem(constants.LANGUAGE);
     return environment.languages.includes(language) ? language : environment.defaultLanguage;
   }
 
-  setLanguage(language: string): void {
+  set language(language: string) {
     localStorage.setItem(constants.LANGUAGE, language);
   }
 
-  getLayout(): string {
+  get layout(): string {
     return localStorage.getItem(constants.LAYOUT) || 'grid';
   }
 
-  setLayout(layout: string): void {
+  set layout(layout: string) {
     localStorage.setItem(constants.LAYOUT, layout);
   }
 }

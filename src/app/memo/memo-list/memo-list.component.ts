@@ -34,7 +34,7 @@ export class MemoListComponent implements OnInit {
 
   async ngOnInit() {
     await this.guard.canActivate();
-    this.layout = this.layoutService.getLayout();
+    this.layout = this.layoutService.currentLayout();
     this.memos = this.memoService.getMemos()
       .pipe(
         map(next => {

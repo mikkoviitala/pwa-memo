@@ -21,7 +21,7 @@ export class LayoutSelectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
-    this.layout = this.layoutService.getLayout();
+    this.layout = this.layoutService.currentLayout();
   }
   toggleLayout(): void {
     this.user

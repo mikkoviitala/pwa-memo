@@ -24,6 +24,6 @@ export class LanguageSelectorComponent implements OnInit {
     const language = environment.languages.filter(l => l !== this.selectedLanguage)[0];
     this.selectedLanguage = language;
     this.translateService.use(language);
-    this.localStorageService.setLanguage(language);
+    this.localStorageService.language = language;
   }
 }

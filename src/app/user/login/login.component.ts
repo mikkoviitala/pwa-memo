@@ -43,12 +43,12 @@ export class LoginComponent implements OnInit {
   private _initializeForm(): void {
     this.formGroup = this.formBuilder.group({
       username: [
-        this.localStorageService.getLoggedInUser(), [Validators.required]
+        this.localStorageService.loggedInUser, [Validators.required]
       ],
       password: [
         null, [Validators.required]
       ],
-      rememberMe: this.localStorageService.getRememberMe()
+      rememberMe: this.localStorageService.rememberMe
     }, {
       updateOn: 'change',
     });
@@ -59,9 +59,9 @@ export class LoginComponent implements OnInit {
         password: values.password
       } as SignInOpts;
 
-      this.localStorageService.setRememberMe(values.rememberMe);
+      this.localStorageService.rememberMe = values.rememberMe;
       if (values.rememberMe) {
-        this.localStorageService.setLoggedInUser(this.credentials.username);
+        this.localStorageService.loggedInUser = this.credentials.username;
       } else {
         this.localStorageService.deleteLoggedInUser();
       }

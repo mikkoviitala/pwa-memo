@@ -39,7 +39,7 @@ export class ForgotPasswordComponent implements OnInit {
       )
       .subscribe(async (next: any) => {
         if (next) {
-          this.localStorageService.setRegisteredUser(this.username);
+          this.localStorageService.registeredUser = this.username;
           await this.router.navigate(['/login/resetpassword']);
         } else {
           this.snackbarService.show('error.user');

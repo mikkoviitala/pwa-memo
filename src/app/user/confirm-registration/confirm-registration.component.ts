@@ -28,7 +28,7 @@ export class ConfirmRegistrationComponent implements OnInit {
   async ngOnInit() {
     this._initializeForm();
 
-    this.userName = this.localStorageService.getRegisteredUser();
+    this.userName = this.localStorageService.registeredUser;
     if (!this.userName) {
       await this.router.navigate(['/login/registration']);
     }

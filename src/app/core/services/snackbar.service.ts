@@ -27,7 +27,7 @@ export class SnackbarService {
   }
 
   showUndo(message: string, params?: any): MatSnackBarRef<SimpleSnackBar> {
-    this.translate.use(this.localStorage.getLanguage());
+    this.translate.use(this.localStorage.language);
     return this._open(
       message,
       params || null,

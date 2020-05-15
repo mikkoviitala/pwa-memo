@@ -10,17 +10,17 @@ export class LayoutService {
   private readonly layout: BehaviorSubject<string>;
 
   constructor(private localStorageService: LocalStorageService) {
-    this.layout = new BehaviorSubject<string>(this.localStorageService.getLayout());
+    this.layout = new BehaviorSubject<string>(this.localStorageService.layout);
   }
 
-  getLayout(): Observable<string> {
+  currentLayout(): Observable<string> {
     return this.layout.asObservable();
   }
 
   toggleLayout(): void {
-    const current = this.localStorageService.getLayout();
+    const current = this.localStorageService.layout;
     const next = current === this.layouts[0] ? this.layouts[1] : this.layouts[0];
-    this.localStorageService.setLayout(next);
+    this.localStorageService.layout = next;
     this.layout.next(next);
   }
 }

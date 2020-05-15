@@ -50,7 +50,7 @@ export class ResetPasswordComponent implements OnInit {
 
   private _initializeForm(): void {
     this.params = {
-      username: this.localStorageService.getRegisteredUser(),
+      username: this.localStorageService.registeredUser,
       code: null,
       password: null
     };
