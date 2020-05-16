@@ -17,7 +17,7 @@ export class MemoService {
   constructor(
     private memoQueueService: MemoQueueService,
     private onlineService: OnlineService) {
-      this._watchOnlineEvents(onlineService);
+    this._watchOnlineEvents(onlineService);
   }
 
   getMemos(): Observable<Memo[]> {
@@ -175,23 +175,25 @@ export class MemoService {
 
       switch (memo.operation) {
         case BackendOperation.INSERT:
-          await this.insertMemo(memo);
+          await setTimeout(() => this.insertMemo(memo), 100);
           break;
         case BackendOperation.UPDATE:
-          await this.updateMemo(memo);
+          await setTimeout(() => this.updateMemo(memo), 100);
           break;
         case BackendOperation.DELETE:
-          await this.deleteMemo(memo);
+          await setTimeout(() => this.deleteMemo(memo), 100);
           break;
         default:
           break;
       }
     }
 
-    await this.memoQueueService.clearQueue();
-
     this.suppressUpdates = false;
     this.memos.next([]);
-    setTimeout(() => this._getMemosFromServer(), 500);
+
+    setTimeout(async () => {
+      await this.memoQueueService.clearQueue();
+      this._getMemosFromServer();
+    }, 500);
   }
 }
