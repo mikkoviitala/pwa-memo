@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {UnauthorizedInterceptor} from './interceptors/unauthorized.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {Router, RouterModule} from '@angular/router';
-import {AuthService} from './services/auth.service';
+import {AuthenticationService} from './services/authentication.service';
 import {SnackbarService} from './services/snackbar.service';
 import {FlexModule} from '@angular/flex-layout';
 import {CardLayoutComponent} from './components/card-layout/card-layout.component';
@@ -51,7 +51,7 @@ import {MatBadgeModule, MatTooltipModule} from '@angular/material';
   providers: [
     DatePipe,
     SnackbarService,
-    {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true, deps: [Router, AuthService]}
+    {provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true, deps: [Router, AuthenticationService]}
   ]
 })
 export class CoreModule {

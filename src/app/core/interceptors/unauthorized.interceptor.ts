@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import {AuthService} from '../services/auth.service';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class UnauthorizedInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService) {
+    private authService: AuthenticationService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

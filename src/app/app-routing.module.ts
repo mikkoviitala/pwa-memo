@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {NavigationRootComponent} from './core/components/navigation-root/navigation-root.component';
-import {UnauthenticatedGuardService} from './core/guards/unauthenticated.guard';
+import {UnauthenticatedGuard} from './core/guards/unauthenticated.guard';
 import {LoginComponent} from './user/login/login.component';
 import {ForgotPasswordComponent} from './user/forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './user/reset-password/reset-password.component';
@@ -14,27 +14,27 @@ const routes: Routes = [
   {
     path: 'login',
     component: NavigationRootComponent,
-    canActivate: [UnauthenticatedGuardService],
+    canActivate: [UnauthenticatedGuard],
     children: [{
       path: '',
       component: LoginComponent,
-      canActivate: [UnauthenticatedGuardService]
+      canActivate: [UnauthenticatedGuard]
     }, {
       path: 'forgotpassword',
       component: ForgotPasswordComponent,
-      canActivate: [UnauthenticatedGuardService]
+      canActivate: [UnauthenticatedGuard]
     }, {
       path: 'resetpassword',
       component: ResetPasswordComponent,
-      canActivate: [UnauthenticatedGuardService]
+      canActivate: [UnauthenticatedGuard]
     }, {
       path: 'registration',
       component: RegistrationComponent,
-      canActivate: [UnauthenticatedGuardService]
+      canActivate: [UnauthenticatedGuard]
     }, {
       path: 'confirm',
       component: ConfirmRegistrationComponent,
-      canActivate: [UnauthenticatedGuardService]
+      canActivate: [UnauthenticatedGuard]
     }]
   },
   {

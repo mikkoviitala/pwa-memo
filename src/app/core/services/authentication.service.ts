@@ -16,7 +16,7 @@ import {ResetPassword} from '../models/reset-password.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthenticationService {
   private unknownUser = {
     name: null,
     isLoggedIn: false

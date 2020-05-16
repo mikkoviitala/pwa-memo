@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../core/services/auth.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
 import {SnackbarService} from '../../core/services/snackbar.service';
 import {LocalStorageService} from '../../core/services/local-storage.service';
 import {finalize} from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class ConfirmRegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private localStorageService: LocalStorageService,
     private snackbarService: SnackbarService) {
   }

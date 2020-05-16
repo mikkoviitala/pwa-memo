@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../core/services/auth.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
 import {SnackbarService} from '../../core/services/snackbar.service';
-import {UnauthenticatedGuardService} from '../../core/guards/unauthenticated.guard';
+import {UnauthenticatedGuard} from '../../core/guards/unauthenticated.guard';
 import {finalize} from 'rxjs/operators';
 import {LocalStorageService} from '../../core/services/local-storage.service';
 
@@ -20,9 +20,9 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private localStorageService: LocalStorageService,
-    private guard: UnauthenticatedGuardService,
+    private guard: UnauthenticatedGuard,
     private snackbarService: SnackbarService) {
   }
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class BaseGuard implements CanActivate {
 
   constructor(
     protected router: Router,
-    protected authService: AuthService) {
+    protected authService: AuthenticationService) {
   }
 
   async canActivate(): Promise<boolean> {

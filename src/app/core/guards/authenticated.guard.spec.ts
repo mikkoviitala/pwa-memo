@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AuthenticatedGuard } from './authenticated.guard';
 
-describe('AuthGuardService', () => {
+describe('AuthenticatedGuard', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {

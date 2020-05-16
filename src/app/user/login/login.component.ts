@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {SignInOpts} from '@aws-amplify/auth/src/types/Auth';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../core/services/auth.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
 import {Router} from '@angular/router';
-import {UnauthenticatedGuardService} from '../../core/guards/unauthenticated.guard';
+import {UnauthenticatedGuard} from '../../core/guards/unauthenticated.guard';
 import {finalize} from 'rxjs/operators';
 import {LocalStorageService} from '../../core/services/local-storage.service';
 
@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private localStorageService: LocalStorageService,
-    private guard: UnauthenticatedGuardService) {
+    private guard: UnauthenticatedGuard) {
   }
 
   ngOnInit(): void {

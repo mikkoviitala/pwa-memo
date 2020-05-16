@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../services/auth.service';
+import {AuthenticationService} from '../../../services/authentication.service';
 import {AuthenticatedGuard} from '../../../guards/authenticated.guard';
 import {Observable} from 'rxjs';
 import {User} from '../../../models/user.interface';
@@ -13,7 +13,7 @@ export class MenuComponent implements OnInit {
   user: Observable<User>;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private guard: AuthenticatedGuard) {
   }
 

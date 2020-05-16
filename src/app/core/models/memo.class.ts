@@ -1,4 +1,4 @@
-import {BackendOperation} from '../services/memo.service';
+import {BackendOperation} from '../services/memo-queue.service';
 
 export class Memo {
   id: string | null;

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AuthService} from '../../core/services/auth.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types/Auth';
 import {finalize} from 'rxjs/operators';
 import {LocalStorageService} from '../../core/services/local-storage.service';
@@ -19,7 +19,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private localStorageService: LocalStorageService) {
   }
 

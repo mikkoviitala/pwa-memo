@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AuthService} from '../../../services/auth.service';
+import {AuthenticationService} from '../../../services/authentication.service';
 import {first} from 'rxjs/operators';
 import {LayoutService} from '../../../services/layout.service';
 import {User} from '../../../models/user.interface';
@@ -15,7 +15,7 @@ export class LayoutSelectorComponent implements OnInit {
   layout: Observable<string>;
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthenticationService,
     private layoutService: LayoutService) {
   }
 
