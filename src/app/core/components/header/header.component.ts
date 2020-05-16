@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OnlineService} from '../../services/online.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {MemoQueueService} from '../../services/memo-queue.service';
 
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private _setTooltip(): void {
     this.tooltip = !this.isOnline ?
-      this.translate.instant('toolbar.offline', { count: this.pendingChanges }) :
+      this.translate.instant('toolbar.offline', {count: this.pendingChanges}) :
       '';
   }
 }
