@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import Dexie from 'dexie';
 import {Memo} from '../models/memo.class';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 const DATABASE_NAME = 'PwaMemo';
 
@@ -15,9 +16,15 @@ export enum BackendOperation {
 })
 export class MemoQueueService {
   private database: any;
+  private countChanged = new BehaviorSubject<number>(0);
 
   constructor() {
     this._createDatabase();
+    this._setCount();
+  }
+
+  get count(): Observable<number> {
+    return this.countChanged.asObservable();
   }
 
   async getQueue(): Promise<Memo[]> {
@@ -43,18 +50,24 @@ export class MemoQueueService {
   }
 
   async updateQueued(memo: Memo): Promise<any> {
-    return this.database.memos.update(memo.requestId, {
+    const result = await this.database.memos.update(memo.requestId, {
       name: memo.name,
       description: memo.description
     });
+    this._setCount();
+    return result;
   }
 
   async deleteQueued(memo: Memo): Promise<any> {
-    return this.database.memos.delete(memo.requestId);
+    const result = await this.database.memos.delete(memo.requestId);
+    this._setCount();
+    return result;
   }
 
   async clearQueue(): Promise<any> {
-    return this.database.memos.clear();
+    const result = await this.database.memos.clear();
+    this._setCount();
+    return result;
   }
 
   private _createDatabase(): void {
@@ -74,10 +87,17 @@ export class MemoQueueService {
         date: memo.date
       })
       .then((requestId: number) => {
+        this._setCount();
+
         memo.requestId = requestId;
         memo.operation = operation;
         return memo;
       })
       .catch(e => console.log(e.stack || e));
+  }
+
+  private _setCount(): void {
+    this.database.memos.count()
+      .then(items => this.countChanged.next(items));
   }
 }

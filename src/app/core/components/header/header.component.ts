@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OnlineService} from '../../services/online.service';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
+import {MemoQueueService} from '../../services/memo-queue.service';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private translate: TranslateService,
+    private memoQueueService: MemoQueueService,
     private onlineService: OnlineService) {
     this.isOnline = true;
   }
@@ -25,8 +27,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.translate.onLangChange.subscribe(() => this._setTooltip()));
 
     this.subscriptions.push(
-        this.onlineService.onlineStateChanged.subscribe(next => {
+      this.onlineService.onlineStateChanged.subscribe(next => {
         this.isOnline = next;
+        this._setTooltip();
+      }));
+
+    this.subscriptions.push(
+      this.memoQueueService.count.subscribe(count => {
+        this.pendingChanges = count;
         this._setTooltip();
       }));
   }
@@ -36,9 +44,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private _setTooltip(): void {
-    this.tooltip = '';
-    /*this.tooltip = !this.isOnline ?
-      this.translate.instant('toolbar.offline', { count: 10 }) :
-      '';*/
+    this.tooltip = !this.isOnline ?
+      this.translate.instant('toolbar.offline', { count: this.pendingChanges }) :
+      '';
   }
 }
