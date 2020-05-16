@@ -4,27 +4,20 @@ import {API, graphqlOperation} from '@aws-amplify/api';
 import {first} from 'rxjs/operators';
 import {Memo} from '../models/memo.class';
 import {OnlineService} from './online.service';
-import Dexie from 'dexie';
-
-const DATABASE_NAME = 'PwaMemo';
-
-export enum BackendOperation {
-  INSERT = 1,
-  UPDATE = 2,
-  DELETE = 3
-}
+import {BackendOperation, MemoQueueService} from './memo-queue.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MemoService {
-  private database: any;
+
   private suppressUpdates: boolean;
   private readonly memos: BehaviorSubject<Memo[]> = new BehaviorSubject<Memo[]>(null);
 
-  constructor(private onlineService: OnlineService) {
-    this._createDatabase();
-    this._watchOnlineEvents(onlineService);
+  constructor(
+    private memoQueueService: MemoQueueService,
+    private onlineService: OnlineService) {
+      this._watchOnlineEvents(onlineService);
   }
 
   getMemos(): Observable<Memo[]> {
@@ -51,7 +44,7 @@ export class MemoService {
         .pipe(first())
         .subscribe(next => this._insert(Memo.fromGraphQLObject(next)));
     } else {
-      memo = await this._addBackendOperation(BackendOperation.INSERT, memo);
+      memo = await this.memoQueueService.addToInsertQueue(memo);
       this._insert(memo);
     }
   }
@@ -67,40 +60,35 @@ export class MemoService {
 
   async updateMemo(memo: Memo) {
     if (this.onlineService.isOnline) {
-      const query = `mutation update($id: ID!, $name: String, $description: String, $date: AWSDateTime) {
-        updateMemo(input: {
-          id: $id,
-          name: $name,
-          description: $description,
-          date: $date
-        }) { id name description date }
-      }`;
-      const variables = {
-        id: memo.id,
-        name: memo.name,
-        description: memo.description,
-        date: memo.date
-      };
-
       if (memo.id) {
+        const query = `mutation update($id: ID!, $name: String, $description: String, $date: AWSDateTime) {
+          updateMemo(input: {
+            id: $id,
+            name: $name,
+            description: $description,
+            date: $date
+          }) { id name description date }
+        }`;
+
+        const variables = {
+          id: memo.id,
+          name: memo.name,
+          description: memo.description,
+          date: memo.date
+        };
+
         from(API.graphql(graphqlOperation(query, variables)))
           .pipe(first())
           .subscribe(() => this._update(memo));
       } else {
-        await this.database.memos.update(memo.requestId, {
-          name: memo.name,
-          description: memo.description
-        });
+        await this.memoQueueService.updateQueued(memo);
         this._update(memo);
       }
     } else {
       if (!memo.requestId) {
-        memo = await this._addBackendOperation(BackendOperation.UPDATE, memo);
+        memo = await this.memoQueueService.addToUpdateQueue(memo);
       } else {
-        await this.database.memos.update(memo.requestId, {
-          name: memo.name,
-          description: memo.description
-        });
+        await this.memoQueueService.updateQueued(memo);
       }
       this._update(memo);
     }
@@ -118,7 +106,7 @@ export class MemoService {
 
   async deleteMemo(memo: Memo) {
     if (memo.requestId) {
-      await this.database.memos.delete(memo.requestId);
+      await this.memoQueueService.deleteQueued(memo);
       this._delete(memo, 'requestId');
     } else {
       if (this.onlineService.isOnline) {
@@ -135,7 +123,7 @@ export class MemoService {
           .pipe(first())
           .subscribe(() => this._delete(memo, 'id'));
       } else {
-        memo = await this._addBackendOperation(BackendOperation.DELETE, memo);
+        memo = await this.memoQueueService.addToDeleteQueue(memo);
         this._delete(memo, 'id');
       }
     }
@@ -173,47 +161,19 @@ export class MemoService {
   private _watchOnlineEvents(onlineService: OnlineService) {
     onlineService.onlineStateChanged.subscribe(async online => {
       if (online) {
-        console.log('browser online, synchronizing with backend');
         await this._synchronizeWithBackend();
-      } else {
-        console.log('browser offline, storing locally');
       }
     });
   }
 
-  private _createDatabase(): void {
-    this.database = new Dexie(DATABASE_NAME);
-    this.database.version(1).stores({
-      memos: '++requestId, operation, id, name, description, date'
-    });
-  }
-
-  private _addBackendOperation(operation: BackendOperation, memo: Memo): Memo {
-    return this.database.memos
-      .add({
-        operation,
-        id: memo.id,
-        name: memo.name,
-        description: memo.description,
-        date: memo.date
-      })
-      .then((requestId: number) => {
-        memo.requestId = requestId;
-        memo.operation = operation;
-        return memo;
-      })
-      .catch(e => console.log(e.stack || e));
-  }
-
   private async _synchronizeWithBackend() {
     this.suppressUpdates = true;
-    const records: any[] = await this.database.memos.toArray();
+    const memos: Memo[] = await this.memoQueueService.getQueue();
 
-    for (const record of records) {
-      const memo: Memo = new Memo(record);
+    for (const memo of memos) {
       memo.requestId = undefined;
 
-      switch (record.operation) {
+      switch (memo.operation) {
         case BackendOperation.INSERT:
           await this.insertMemo(memo);
           break;
@@ -226,9 +186,9 @@ export class MemoService {
         default:
           break;
       }
-
-      await this.database.memos.delete(record.requestId);
     }
+
+    await this.memoQueueService.clearQueue();
 
     this.suppressUpdates = false;
     this.memos.next([]);
