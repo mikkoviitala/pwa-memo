@@ -3,7 +3,8 @@
     "undo": "Undo"
   },
   "toolbar": {
-    "header": "Memo"
+    "header": "Memo",
+    "offline": "No internet connection, {{ count }} changes pending"
   },
   "login": {
     "header": "Please log in",

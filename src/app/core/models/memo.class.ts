@@ -1,25 +1,32 @@
+import {BackendOperation} from '../services/memo.service';
+
 export class Memo {
   id: string | null;
   name: string | null;
   description: string | null;
   date: string;
+  requestId?: number;
+  operation?: BackendOperation;
 
-  constructor(id?: string, name?: string, description?: string, date?: string) {
-    this.id = id || null;
-    this.name = name || null;
-    this.description = description || null;
-    this.date = date || (new Date()).toISOString();
+  constructor(obj?: any) {
+    obj = obj ? obj : {};
+
+    this.id = obj.id || null;
+    this.name =  obj.name || null;
+    this.description = obj.description || null;
+    this.date = obj.date || (new Date()).toISOString();
+    this.requestId = obj.requestId || undefined;
+    this.operation = obj.operation || undefined;
   }
 
-  static fromObject(response: any): Memo {
-    const item = response.data.createMemo;
-    return item as Memo;
+  static fromGraphQLObject(response: any): Memo {
+    return new Memo(response.data.createMemo);
   }
 
-  static fromCollection(response: any): Memo[] {
-    const memos = [];
-    const items = response.data.listMemos.items;
-    items.forEach(item => memos.push(item as Memo));
-    return memos as Memo[];
+  static fromGraphQLCollection(response: any): Memo[] {
+    const memos: Memo[] = [];
+    const objs = response.data.listMemos.items;
+    objs.forEach(obj => memos.push(new Memo(obj)));
+    return memos;
   }
 }

@@ -16,6 +16,7 @@ import {MenuComponent} from './components/header/menu/menu.component';
 import {CommonModule, DatePipe} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {LocalDatePipe} from './pipes/local-date.pipe';
+import {MatBadgeModule, MatTooltipModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import {LocalDatePipe} from './pipes/local-date.pipe';
     RouterModule,
     MaterialComponentsModule,
     CommonModule,
-    TranslateModule
+    TranslateModule,
+    MatBadgeModule,
+    MatTooltipModule
   ],
   exports: [
     HeaderComponent,

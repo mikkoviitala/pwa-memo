@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {AuthenticatedGuard} from '../../core/guards/authenticated.guard';
 import {DialogService} from '../../core/services/dialog.service';
 import {SnackbarService} from '../../core/services/snackbar.service';
-import {first, map, tap} from 'rxjs/operators';
+import {first, map, take} from 'rxjs/operators';
 import {MediaObserver} from '@angular/flex-layout';
 import {fadeInOut} from '../../core/animations/fade-in-out';
 import {LayoutService} from '../../core/services/layout.service';
@@ -52,35 +52,32 @@ export class MemoListComponent implements OnInit {
       .pipe(first())
       .subscribe((next) => {
         if (next) {
-          this.memoService.insert(next);
+          this.memoService.insertMemo(next);
           this.snackbarService.show('success.memo-edited');
         }
       }, () => this.snackbarService.show('error.memo-edited'));
   }
 
   updateMemo(memo: Memo): void {
-    const copy = new Memo();
-    Object.assign(copy, memo);
+    const copy: Memo = new Memo(memo);
 
     this.dialogService.editMemo(copy)
       .pipe(first())
       .subscribe((next) => {
         if (next) {
-          this.memoService.update(next);
+          this.memoService.updateMemo(next);
           this.snackbarService.show('success.memo-edited');
         }
       }, () => this.snackbarService.show('error.memo-edited'));
   }
 
   deleteMemo(memo: Memo): void {
-    const copy = new Memo();
-    Object.assign(copy, memo);
+    const copy: Memo = new Memo(memo);
 
-    this.memoService.delete(memo);
-
+    this.memoService.deleteMemo(memo);
     this.snackbarService.showUndo('success.memo-deleted')
       .onAction()
-      .pipe(first())
-      .subscribe(() => this.memoService.insert(copy));
+      .pipe(take(1))
+      .subscribe(() => this.memoService.insertMemo(copy));
   }
 }

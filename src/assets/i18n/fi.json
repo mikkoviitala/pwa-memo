@@ -3,7 +3,8 @@
     "undo": "Peruuta"
   },
   "toolbar": {
-    "header": "Memo"
+    "header": "Memo",
+    "offline": "Ei internetyhteyttä, jonossa on {{ count }} muutosta"
   },
   "login": {
     "header": "Kirjaudu sisään",
