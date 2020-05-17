@@ -1,20 +1,26 @@
 # Memo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.18.
+...
 
-## Development
+## More...
+
+## Architecture
+
+![Alt text](/readme-images/architecture.svng)
+
+### Development
 
 Run `ng serve`, navigate to `http://localhost:4200/`
 
-## Build
+### Build
 
 `ng build` or `ng build --prod` for a production build
 
-## Running unit tests
+### Running unit tests
 
 `ng test` runs unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Running end-to-end tests
 
 `ng e2e` runs end-to-end tests via [Protractor](http://www.protractortest.org/).
 
