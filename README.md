@@ -44,7 +44,7 @@ Note that you need to have AWS account and additional tasks may be required on t
 
 ### Build
 
-`ng build` or `ng build --prod` for a production build.
+`ng build` or `ng build --prod` for a production build.<br>
 `http-server dist/pwa-memo -o` to run locally.
 
 ### Unit tests
