@@ -13,7 +13,7 @@ See it here http://pwa-memo.com
 Even if you identify as conservative, don't worry! You can still use [Memo](https://pwa-memo.com) as progressive web applications have no liberal agenda. It just means that [Memo](https://pwa-memo.com) is, among other things, **responsive**, **installable** and **offline capable**.
 
 - Responsive
-  - Can be used on any device with any (modern) browser, adapts to your screen's size
+  - Can be used on any device with any (modern) browser, layout adapts to screen size
 - Installable
   - Application can be used via web browser but it can also be installed as application on your computer or added to your phone's Home screen
 - Offline capable
