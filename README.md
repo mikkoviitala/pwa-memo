@@ -17,13 +17,15 @@ Even if you identify as conservative, don't worry! You can still use [Memo](http
 - Offline capable
   - Application can be used even without internet connection
 
+![Alt text](/readme-images/offline-queue.png?raw=true)
+
 When logged in and there's no connectivity, you can continue using the application as usual. When connection is detected, all changes you have made are synchronized with the backend. In this case you'll see a small "badge" pop up to indicate number of changes pending on the local device.
 <br>
 <br>
 
 ## Architecture
 
-Here, I drew a picture and all.
+Look, I drew a picture and all.
 
 ![Alt text](/readme-images/architecture.png?raw=true)
 
