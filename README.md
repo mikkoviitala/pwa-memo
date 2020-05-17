@@ -10,11 +10,12 @@
 
 ### Development
 
-`npm install`
-`amplify config`
-`amplify push`
-`ng serve`, navigate to `http://localhost:4200/`
+`npm install`<br>
+`amplify config`<br>
+`amplify push`<br>
+`ng serve`
 
+Navigate to `http://localhost:4200/`<br>
 Note that you need to have AWS account and additional tasks may be required on the AWS console side.
 
 ### Build
