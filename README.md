@@ -1,7 +1,7 @@
 # Memo
 
 [Memo](https://pwa-memo.com) is a minimalistic, Google Keep -like [progressive web application](https://web.dev/what-are-pwas) that integrates with [AWS](https://aws.amazon.com) infrastructure and services. And it's not just that! It's also my way of pointing out that, yes, I can make (some) of your web development fantasies become true!
-
+<br>
 
 ## Ok, what's that progressive supposed to mean?
 
@@ -15,7 +15,7 @@ Even if you identify as conservative, don't worry! You can still use [Memo](http
   - Application can be used even without internet connection
 
 When logged in and there's no connectivity, you can continue using the application as usual. When connection is detected, all changes you have made are synchronized with the backend. In this case you'll see a small "badge" pop up to indicate number of changes pending on the local device.
-
+<br>
 
 ## Architecture
 
@@ -26,7 +26,7 @@ Here, I drew a picture and all.
 In short, application is stored and hosted in a S3 bucket. Application is cached on multiple AWS edge locations as Cloudfront distribution. Route 53 routes requests to pwa-memo.com domain to these distros. Once web page is loaded, user is authenticated against Cognito user/indentity pools and client receives token that allows access to AWS services (namely, the GraphQL API). Serverless backend, the AppSync, handles GraphQL mutations and connection between application ann the DynamoDB database.
 
 <hr>
-
+<br>
 
 ### Development
 
