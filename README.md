@@ -39,11 +39,11 @@ Note that you need to have AWS account and additional tasks may be required on t
 
 `ng build` or `ng build --prod` for a production build
 
-### Running unit tests
+### Unit tests
 
 `ng test` runs unit tests via [Karma](https://karma-runner.github.io).
 
-### Running end-to-end tests
+### End-to-end tests
 
 `ng e2e` runs end-to-end tests via [Protractor](http://www.protractortest.org/).
 
