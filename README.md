@@ -6,7 +6,7 @@
 
 ## Architecture
 
-![Alt text](/readme-images/architecture.svng)
+![Alt text](/readme-images/architecture.png?raw=true)
 
 ### Development
 
