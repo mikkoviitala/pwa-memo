@@ -21,7 +21,7 @@ Here, I drew a picture and all.
 
 ![Alt text](/readme-images/architecture.png?raw=true)
 
-In short, application is stored and hosted in a S3 bucket. Application is cached on multiple AWS edge locations as Cloudfront distribution. Route 53 routes requests to pwa-memo.com domain to these distros. Once web page is loaded, user is authenticated against Cognito user/indentity pools and client receives token that allows access to AWS services (namely, the GraphQL API). Serverless backend, the AppSync, handles GraphQL mutations and connection between application on the DynamoDB database.
+In short, application is stored and hosted in a S3 bucket. Application is cached on multiple AWS edge locations as Cloudfront distribution. Route 53 routes requests to pwa-memo.com domain to these distros. Once web page is loaded, user is authenticated against Cognito user/indentity pools and client receives token that allows access to AWS services (namely, the GraphQL API). Serverless backend, the AppSync, handles GraphQL mutations and connection between application ann the DynamoDB database.
 
 <hr>
 
