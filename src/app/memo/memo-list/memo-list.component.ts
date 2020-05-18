@@ -38,11 +38,11 @@ export class MemoListComponent implements OnInit {
     this.memos = this.memoService.getMemos()
       .pipe(
         map(next => {
+          this.noMemos = !next || next.length === 0;
           if (next) {
             next.sort((memo1, memo2) => memo2.date.localeCompare(memo1.date));
             return next;
           }
-          this.noMemos = next && next.length === 0;
         })
       );
   }
