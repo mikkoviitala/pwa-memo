@@ -1,7 +1,10 @@
 <app-card-layout>
   <!-- confirm registration card -->
   <mat-card *ngIf="!inProgress" class="mat-card-outlined confirm-registration">
-    <mat-card-title class="angular-material">{{ 'registration.header' | translate }}</mat-card-title>
+    <mat-card-header class="header">
+      <mat-icon mat-card-avatar class="mat-primary">person_add</mat-icon>
+      <mat-card-title class="angular-material">{{ 'registration.header' | translate }}</mat-card-title>
+    </mat-card-header>
     <mat-card-content>
       <div>{{ 'registration.message' | translate }}</div>
       <br>
@@ -24,7 +27,7 @@
             formControlName="code"
             autocomplete="off"
             [placeholder]="'registration.code' | translate">
-          <label matSuffix>*</label>
+          <mat-icon class="form-field-suffix-icon" matSuffix>security</mat-icon>
         </mat-form-field>
       </form>
     </mat-card-content>
@@ -38,9 +41,11 @@
       </button>
     </mat-dialog-actions>
 
-    <div class="mat-dialog-link">
-      <a href="javascript:void(0)" (click)="resendVerificationCode()">{{ 'registration.resend-code' | translate }}</a>
-    </div>
+    <mat-card-footer>
+      <div class="mat-dialog-link" fxLayout="column">
+        <a href="javascript:void(0)" (click)="resendVerificationCode()">{{ 'registration.resend-code' | translate }}</a>
+      </div>
+    </mat-card-footer>
   </mat-card>
 
   <!-- spinner -->
