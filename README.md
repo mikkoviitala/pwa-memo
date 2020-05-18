@@ -29,7 +29,7 @@ When logged in and there's no connectivity, you can continue using the applicati
 
 ## Architecture
 
-Look, I drew a picture and all.
+Here, I drew a picture and all.
 
 ![architecture](/readme-images/architecture.png?raw=true)
 
