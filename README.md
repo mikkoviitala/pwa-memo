@@ -1,6 +1,6 @@
 # Memo
 
-[Memo](https://pwa-memo.com) is a minimalistic, Google Keep -like [progressive web application](https://web.dev/what-are-pwas) where you can keep notes. At this time notes can be text only, but preview of any given url is fetched. Application integrates with [AWS](https://aws.amazon.com) infrastructure and services.
+[Memo](https://pwa-memo.com) is a minimalistic, Google Keep -like [progressive web application](https://web.dev/what-are-pwas) where you can keep notes. Currently notes can contain only text but preview of any given url is fetched. Application integrates with [AWS](https://aws.amazon.com) infrastructure and services.
 
 But it's not just that! It's also my way of pointing out that, yes, I can make (some) of your web development fantasies become true :)
 
@@ -29,7 +29,7 @@ When logged in and there's no connectivity, you can continue using the applicati
 
 ## Architecture
 
-Look, I drew a picture and all.
+Here, I drew a picture and all.
 
 ![architecture](/readme-images/architecture.png?raw=true)
 
