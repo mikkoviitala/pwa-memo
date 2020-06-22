@@ -2,8 +2,6 @@
 
 [Memo](https://pwa-memo.com) is a minimalistic, Google Keep -like [progressive web application](https://web.dev/what-are-pwas) where you can keep notes. Currently notes can contain only text but preview of any given url is fetched. Application integrates with [AWS](https://aws.amazon.com) infrastructure and services.
 
-But it's not just that! It's also my way of pointing out that, yes, I can make (some) of your web development fantasies become true :)
-
 **Try it out @ http://pwa-memo.com**
 
 ![login-view](/readme-images/login-view.png) ![memo-view](/readme-images/memo-view.png)
@@ -39,6 +37,10 @@ In short, application is stored and hosted in a S3 bucket. Application is cached
 
 <hr>
 <br>
+
+### But why?
+
+Just because I wanted to get my hands dirty with various AWS services.
 
 ### Development
 
