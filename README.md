@@ -40,7 +40,7 @@ In short, application is stored and hosted in a S3 bucket. Application is cached
 
 ### But why?
 
-Just because I wanted to get my hands dirty with various AWS services.
+Just because I wanted to get my hands dirty with various AWS services and tools they provide.
 
 ### Development
 
