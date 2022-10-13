@@ -2,9 +2,9 @@
 
 [Memo](https://pwa-memo.com) is a minimalistic, Google Keep -like [progressive web application](https://web.dev/what-are-pwas) where you can keep notes. Currently notes can contain only text but preview of any given url is fetched. Application integrates with [AWS](https://aws.amazon.com) infrastructure and services.
 
-**Try it out @ http://pwa-memo.com**
+**Try it out @ http://pwa-memo.com** <- expired :(
 
-![login-view](/readme-images/login-view.png) ![memo-view](/readme-images/memo-view.png) <- expired :(
+![login-view](/readme-images/login-view.png) ![memo-view](/readme-images/memo-view.png)
 <br>
 <br>
 
